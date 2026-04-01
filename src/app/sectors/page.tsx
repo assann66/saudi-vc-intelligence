@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { sectors } from "@/data/sectors";
 import { companies } from "@/data/companies";
 import { formatCurrency, cn } from "@/lib/utils";
@@ -21,9 +22,10 @@ export default function SectorsPage() {
         {sortedSectors.map((sector, i) => {
           const sectorCompanies = companies.filter((c) => c.sectorId === sector.id);
           return (
-            <div
+            <Link
               key={sector.id}
-              className="glass glass-hover rounded-xl p-6 transition-all duration-300 hover:scale-[1.01] animate-fade-in cursor-pointer"
+              href={`/sectors/${sector.id}`}
+              className="glass glass-hover rounded-xl p-6 transition-all duration-300 hover:scale-[1.01] animate-fade-in cursor-pointer block"
               style={{ animationDelay: `${i * 60}ms` }}
             >
               <div className="flex items-start justify-between mb-4">
@@ -96,7 +98,7 @@ export default function SectorsPage() {
                   <p className="text-[9px] text-[#71717a] uppercase">Avg Deal</p>
                 </div>
               </div>
-            </div>
+            </Link>
           );
         })}
       </div>

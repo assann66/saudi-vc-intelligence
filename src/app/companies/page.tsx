@@ -1,10 +1,11 @@
 "use client";
 
+import Link from "next/link";
 import { companies } from "@/data/companies";
 import { sectors } from "@/data/sectors";
 import { formatCurrency, cn } from "@/lib/utils";
 import { useState } from "react";
-import { Search, ArrowUpDown } from "lucide-react";
+import { Search, ArrowUpDown, ChevronRight } from "lucide-react";
 
 type SortKey = "investability" | "totalFunding" | "growthRate" | "riskScore" | "name";
 
@@ -152,6 +153,7 @@ export default function CompaniesPage() {
                 <th className="px-5 py-3 text-left text-[10px] font-semibold uppercase tracking-widest text-[#71717a]">
                   Investors
                 </th>
+                <th className="px-5 py-3 text-right text-[10px] font-semibold uppercase tracking-widest text-[#71717a]"></th>
               </tr>
             </thead>
             <tbody>
@@ -216,6 +218,11 @@ export default function CompaniesPage() {
                         </span>
                       )}
                     </div>
+                  </td>
+                  <td className="px-5 py-4 text-right">
+                    <Link href={`/companies/${company.id}`} className="text-[#71717a] hover:text-white transition-colors">
+                      <ChevronRight className="w-4 h-4" />
+                    </Link>
                   </td>
                 </tr>
               ))}
