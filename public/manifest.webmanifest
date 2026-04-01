@@ -1,0 +1,17 @@
+{
+  "name": "Saudi VC Intelligence Platform",
+  "short_name": "Saudi VC Intel",
+  "description": "AI-powered investment intelligence for Saudi Arabian venture capital analysis",
+  "start_url": "/saudi-vc-intelligence/",
+  "scope": "/saudi-vc-intelligence/",
+  "display": "standalone",
+  "background_color": "#0a0a0f",
+  "theme_color": "#0a0a0f",
+  "icons": [
+    {
+      "src": "/saudi-vc-intelligence/favicon.ico",
+      "sizes": "64x64 32x32 16x16",
+      "type": "image/x-icon"
+    }
+  ]
+}

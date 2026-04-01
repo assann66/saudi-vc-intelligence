@@ -1,0 +1,24 @@
+<svg width="1200" height="630" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0a0a0f"/>
+      <stop offset="100%" style="stop-color:#1a1a2e"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#10b981"/>
+      <stop offset="100%" style="stop-color:#06b6d4"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect x="0" y="0" width="1200" height="4" fill="url(#accent)"/>
+  <text x="80" y="240" font-family="system-ui, -apple-system, sans-serif" font-size="56" font-weight="bold" fill="white">Saudi VC Intelligence</text>
+  <text x="80" y="310" font-family="system-ui, -apple-system, sans-serif" font-size="56" font-weight="bold" fill="url(#accent)">Platform</text>
+  <text x="80" y="380" font-family="system-ui, -apple-system, sans-serif" font-size="24" fill="#71717a">AI-powered investment intelligence for Saudi Arabia</text>
+  <text x="80" y="420" font-family="system-ui, -apple-system, sans-serif" font-size="24" fill="#71717a">10 sectors · 28+ companies · Vision 2030 aligned</text>
+  <rect x="80" y="470" width="120" height="36" rx="4" fill="#10b981" opacity="0.15"/>
+  <text x="105" y="494" font-family="system-ui, -apple-system, sans-serif" font-size="14" font-weight="600" fill="#10b981">RANKINGS</text>
+  <rect x="220" y="470" width="110" height="36" rx="4" fill="#06b6d4" opacity="0.15"/>
+  <text x="240" y="494" font-family="system-ui, -apple-system, sans-serif" font-size="14" font-weight="600" fill="#06b6d4">REPORTS</text>
+  <rect x="350" y="470" width="90" height="36" rx="4" fill="#8b5cf6" opacity="0.15"/>
+  <text x="370" y="494" font-family="system-ui, -apple-system, sans-serif" font-size="14" font-weight="600" fill="#8b5cf6">RISK</text>
+</svg>
