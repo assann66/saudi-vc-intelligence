@@ -1,4 +1,4 @@
-export const dynamic = "force-dynamic";
+"use client";
 
 import { KpiCard } from "@/components/dashboard/kpi-card";
 import { SectorChart } from "@/components/dashboard/sector-chart";
