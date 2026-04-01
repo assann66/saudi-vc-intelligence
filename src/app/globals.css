@@ -68,6 +68,103 @@ body {
   to { opacity: 1; transform: translateY(0); }
 }
 
+@keyframes slideInLeft {
+  from { opacity: 0; transform: translateX(-16px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes slideInRight {
+  from { opacity: 0; transform: translateX(16px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 20px rgba(16, 185, 129, 0.1); }
+  50% { box-shadow: 0 0 40px rgba(16, 185, 129, 0.2); }
+}
+
 .animate-fade-in {
   animation: fadeIn 0.5s ease-out forwards;
+}
+
+.animate-slide-in-left {
+  animation: slideInLeft 0.5s ease-out forwards;
+}
+
+.animate-slide-in-right {
+  animation: slideInRight 0.5s ease-out forwards;
+}
+
+.animate-scale-in {
+  animation: scaleIn 0.4s ease-out forwards;
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 3s ease-in-out infinite;
+}
+
+.skeleton {
+  background: linear-gradient(90deg, var(--card) 25%, var(--muted) 50%, var(--card) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s ease-in-out infinite;
+  border-radius: 0.5rem;
+}
+
+/* Smooth page transitions */
+main > * {
+  animation: fadeIn 0.3s ease-out;
+}
+
+/* Responsive sidebar */
+@media (max-width: 768px) {
+  aside {
+    position: fixed;
+    left: -100%;
+    z-index: 50;
+    transition: left 0.3s ease;
+  }
+  aside.open {
+    left: 0;
+  }
+}
+
+/* Print styles for reports */
+@media print {
+  body {
+    background: white !important;
+    color: black !important;
+  }
+  aside {
+    display: none !important;
+  }
+  main {
+    margin: 0 !important;
+  }
+  .glass {
+    background: white !important;
+    border: 1px solid #e5e7eb !important;
+    backdrop-filter: none !important;
+  }
+  .print\\:hidden {
+    display: none !important;
+  }
+}
+
+/* Hover card lift effect */
+.hover-lift {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.hover-lift:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
 }

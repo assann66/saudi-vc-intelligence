@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useState } from "react";
 import { cn } from "@/lib/utils";
 import {
   LayoutDashboard,
@@ -12,6 +13,8 @@ import {
   Trophy,
   FileText,
   ArrowLeftRight,
+  Menu,
+  X,
 } from "lucide-react";
 
 const navigation = [
@@ -29,13 +32,38 @@ const analyticsNav = [
 
 export function Sidebar() {
   const pathname = usePathname();
+  const [mobileOpen, setMobileOpen] = useState(false);
 
   return (
-    <aside className="w-64 border-r border-[#1e1e2e] bg-[#0d0d14] flex flex-col">
+    <>
+      {/* Mobile menu button */}
+      <button
+        onClick={() => setMobileOpen(true)}
+        className="fixed top-4 left-4 z-50 md:hidden p-2 rounded-lg bg-[#12121a] border border-[#1e1e2e] text-white"
+        aria-label="Open menu"
+      >
+        <Menu className="w-5 h-5" />
+      </button>
+
+      {/* Mobile overlay */}
+      {mobileOpen && (
+        <div
+          className="fixed inset-0 z-40 bg-black/60 md:hidden"
+          onClick={() => setMobileOpen(false)}
+        />
+      )}
+
+      <aside
+        className={cn(
+          "w-64 border-r border-[#1e1e2e] bg-[#0d0d14] flex flex-col shrink-0",
+          "fixed md:relative inset-y-0 left-0 z-50 transition-transform duration-300 md:translate-x-0",
+          mobileOpen ? "translate-x-0" : "-translate-x-full md:translate-x-0"
+        )}
+      >
       {/* Logo */}
-      <div className="p-6 border-b border-[#1e1e2e]">
+      <div className="p-6 border-b border-[#1e1e2e] flex items-center justify-between">
         <div className="flex items-center gap-3">
-          <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-emerald-500 to-cyan-500 flex items-center justify-center">
+          <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-emerald-500 to-cyan-500 flex items-center justify-center animate-pulse-glow">
             <Zap className="w-5 h-5 text-white" />
           </div>
           <div>
@@ -43,6 +71,13 @@ export function Sidebar() {
             <p className="text-[10px] text-[#71717a] uppercase tracking-widest">Intelligence</p>
           </div>
         </div>
+        <button
+          onClick={() => setMobileOpen(false)}
+          className="md:hidden text-[#71717a] hover:text-white transition-colors"
+          aria-label="Close menu"
+        >
+          <X className="w-5 h-5" />
+        </button>
       </div>
 
       {/* Navigation */}
@@ -56,6 +91,7 @@ export function Sidebar() {
             <Link
               key={item.name}
               href={item.href}
+              onClick={() => setMobileOpen(false)}
               className={cn(
                 "flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all duration-200",
                 isActive
@@ -79,6 +115,7 @@ export function Sidebar() {
               <Link
                 key={item.name}
                 href={item.href}
+                onClick={() => setMobileOpen(false)}
                 className={cn(
                   "flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all duration-200",
                   isActive
@@ -103,5 +140,6 @@ export function Sidebar() {
         </div>
       </div>
     </aside>
+    </>
   );
 }
