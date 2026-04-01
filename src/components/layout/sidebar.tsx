@@ -7,15 +7,24 @@ import {
   LayoutDashboard,
   Building2,
   PieChart,
-  TrendingUp,
   Shield,
   Zap,
+  Trophy,
+  FileText,
+  ArrowLeftRight,
 } from "lucide-react";
 
 const navigation = [
   { name: "Dashboard", href: "/", icon: LayoutDashboard },
   { name: "Sectors", href: "/sectors", icon: PieChart },
   { name: "Companies", href: "/companies", icon: Building2 },
+];
+
+const analyticsNav = [
+  { name: "Rankings", href: "/rankings", icon: Trophy },
+  { name: "Reports", href: "/reports", icon: FileText },
+  { name: "Risk Insights", href: "/risk-insights", icon: Shield },
+  { name: "Compare", href: "/compare", icon: ArrowLeftRight },
 ];
 
 export function Sidebar() {
@@ -64,16 +73,24 @@ export function Sidebar() {
           <p className="px-3 mb-3 text-[10px] font-semibold uppercase tracking-widest text-[#71717a]">
             Analytics
           </p>
-          <div className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-[#a1a1aa] hover:text-white hover:bg-white/5 transition-all cursor-pointer">
-            <TrendingUp className="w-4 h-4" />
-            Trends
-            <span className="ml-auto text-[10px] bg-emerald-500/20 text-emerald-400 px-1.5 py-0.5 rounded-full">Soon</span>
-          </div>
-          <div className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-[#a1a1aa] hover:text-white hover:bg-white/5 transition-all cursor-pointer">
-            <Shield className="w-4 h-4" />
-            Risk Monitor
-            <span className="ml-auto text-[10px] bg-emerald-500/20 text-emerald-400 px-1.5 py-0.5 rounded-full">Soon</span>
-          </div>
+          {analyticsNav.map((item) => {
+            const isActive = pathname === item.href;
+            return (
+              <Link
+                key={item.name}
+                href={item.href}
+                className={cn(
+                  "flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all duration-200",
+                  isActive
+                    ? "bg-emerald-500/10 text-emerald-400 border border-emerald-500/20"
+                    : "text-[#a1a1aa] hover:text-white hover:bg-white/5"
+                )}
+              >
+                <item.icon className={cn("w-4 h-4", isActive && "text-emerald-400")} />
+                {item.name}
+              </Link>
+            );
+          })}
         </div>
       </nav>
 
