@@ -143,6 +143,12 @@ export function AdminSectorsView({ sectors: initial }: { sectors: Sector[] }) {
           >
             القطاعات
           </Link>
+          <Link
+            href="/admin/import"
+            className="px-4 py-2 rounded-lg text-sm font-medium text-[#a1a1aa] hover:text-white hover:bg-white/5"
+          >
+            استيراد البيانات
+          </Link>
         </div>
         <button
           onClick={openCreate}
