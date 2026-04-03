@@ -168,3 +168,19 @@ main > * {
   transform: translateY(-2px);
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
 }
+
+/* Admin form inputs */
+.form-input {
+  @apply w-full px-3 py-2 rounded-lg bg-[#0a0a0f] border border-[#1e1e2e] text-white text-sm
+    placeholder:text-[#71717a]
+    focus:outline-none focus:border-emerald-500/40 focus:ring-1 focus:ring-emerald-500/20
+    transition-colors;
+}
+
+.form-input:disabled {
+  @apply opacity-50 cursor-not-allowed;
+}
+
+select.form-input {
+  @apply appearance-none bg-[url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2371717a%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22M8%2010.5l-4-4h8l-4%204z%22%2F%3E%3C%2Fsvg%3E')] bg-[length:16px] bg-[right_8px_center] bg-no-repeat pr-8;
+}

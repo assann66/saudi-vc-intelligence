@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
+import { useSession } from "next-auth/react";
 import { cn } from "@/lib/utils";
 import {
   LayoutDashboard,
@@ -15,6 +16,7 @@ import {
   ArrowLeftRight,
   Menu,
   X,
+  Settings,
 } from "lucide-react";
 
 const navigation = [
@@ -30,9 +32,16 @@ const analyticsNav = [
   { name: "Compare", href: "/compare", icon: ArrowLeftRight },
 ];
 
+const adminNav = [
+  { name: "إدارة الشركات", href: "/admin/companies", icon: Building2 },
+  { name: "إدارة القطاعات", href: "/admin/sectors", icon: PieChart },
+];
+
 export function Sidebar() {
   const pathname = usePathname();
   const [mobileOpen, setMobileOpen] = useState(false);
+  const { data: session } = useSession();
+  const isAdmin = (session?.user as { role?: string } | undefined)?.role === "admin";
 
   return (
     <>
@@ -129,6 +138,34 @@ export function Sidebar() {
             );
           })}
         </div>
+
+        {isAdmin && (
+          <div className="pt-6">
+            <p className="px-3 mb-3 text-[10px] font-semibold uppercase tracking-widest text-[#71717a]">
+              <Settings className="w-3 h-3 inline-block ml-1" />
+              Admin
+            </p>
+            {adminNav.map((item) => {
+              const isActive = pathname === item.href;
+              return (
+                <Link
+                  key={item.name}
+                  href={item.href}
+                  onClick={() => setMobileOpen(false)}
+                  className={cn(
+                    "flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all duration-200",
+                    isActive
+                      ? "bg-emerald-500/10 text-emerald-400 border border-emerald-500/20"
+                      : "text-[#a1a1aa] hover:text-white hover:bg-white/5"
+                  )}
+                >
+                  <item.icon className={cn("w-4 h-4", isActive && "text-emerald-400")} />
+                  {item.name}
+                </Link>
+              );
+            })}
+          </div>
+        )}
       </nav>
 
       {/* Footer */}
