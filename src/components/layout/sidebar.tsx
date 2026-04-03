@@ -18,6 +18,7 @@ import {
   X,
   Settings,
 } from "lucide-react";
+import { GlobalSearch } from "./global-search";
 
 const navigation = [
   { name: "Dashboard", href: "/", icon: LayoutDashboard },
@@ -88,6 +89,9 @@ export function Sidebar() {
           <X className="w-5 h-5" />
         </button>
       </div>
+
+      {/* Global Search */}
+      <GlobalSearch />
 
       {/* Navigation */}
       <nav className="flex-1 px-3 py-4 space-y-1">

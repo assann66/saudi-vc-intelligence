@@ -13,6 +13,9 @@ export async function GET(request: Request) {
       stage: searchParams.get("stage") ?? undefined,
       sortBy: searchParams.get("sortBy") ?? undefined,
       order: searchParams.get("order") ?? undefined,
+      q: searchParams.get("q") ?? undefined,
+      page: searchParams.get("page") ?? undefined,
+      pageSize: searchParams.get("pageSize") ?? undefined,
     });
 
     if (!parsed.success) {
@@ -22,23 +25,45 @@ export async function GET(request: Request) {
       );
     }
 
-    const { sectorId, stage, sortBy, order } = parsed.data;
-    const where: Record<string, string> = {};
+    const { sectorId, stage, sortBy, order, q, page, pageSize } = parsed.data;
+
+    const where: Record<string, unknown> = {};
     if (sectorId) where.sectorId = sectorId;
     if (stage) where.stage = stage;
+    if (q) {
+      where.OR = [
+        { name: { contains: q } },
+        { arabicName: { contains: q } },
+        { description: { contains: q } },
+        { hqCity: { contains: q } },
+      ];
+    }
 
-    const companies = await prisma.company.findMany({
-      where,
-      include: { sector: true },
-      orderBy: { [sortBy]: order },
-    });
+    const [companies, total] = await Promise.all([
+      prisma.company.findMany({
+        where,
+        include: { sector: true },
+        orderBy: { [sortBy]: order },
+        skip: (page - 1) * pageSize,
+        take: pageSize,
+      }),
+      prisma.company.count({ where }),
+    ]);
 
     const result = companies.map((c) => ({
       ...c,
       investors: JSON.parse(c.investors),
     }));
 
-    return NextResponse.json(result);
+    return NextResponse.json({
+      data: result,
+      pagination: {
+        page,
+        pageSize,
+        total,
+        totalPages: Math.ceil(total / pageSize),
+      },
+    });
   } catch (error) {
     console.error("خطأ في جلب الشركات:", error);
     return NextResponse.json(

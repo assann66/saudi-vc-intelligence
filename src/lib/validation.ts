@@ -5,11 +5,17 @@ export const companiesQuerySchema = z.object({
   stage: z.string().optional(),
   sortBy: z.enum(["investability", "totalFunding", "growthRate", "riskScore", "name"]).default("investability"),
   order: z.enum(["asc", "desc"]).default("desc"),
+  q: z.string().optional(),
+  page: z.coerce.number().int().min(1).default(1),
+  pageSize: z.coerce.number().int().min(1).max(100).default(10),
 });
 
 export const sectorsQuerySchema = z.object({
   sortBy: z.enum(["attractiveness", "riskScore", "totalFunding", "companyCount", "name"]).default("attractiveness"),
   order: z.enum(["asc", "desc"]).default("desc"),
+  q: z.string().optional(),
+  page: z.coerce.number().int().min(1).default(1),
+  pageSize: z.coerce.number().int().min(1).max(100).default(10),
 });
 
 export const idParamSchema = z.object({

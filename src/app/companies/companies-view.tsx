@@ -1,45 +1,81 @@
 "use client";
 
 import Link from "next/link";
+import { useRouter, usePathname, useSearchParams } from "next/navigation";
 import type { Company } from "@/data/companies";
 import type { Sector } from "@/data/sectors";
 import { formatCurrency, cn } from "@/lib/utils";
-import { useState } from "react";
-import { Search, ArrowUpDown, ChevronRight } from "lucide-react";
+import { useState, useEffect, useCallback } from "react";
+import { Search, ArrowUpDown, ChevronRight, X } from "lucide-react";
+import { Pagination } from "@/components/ui/pagination";
 
 type SortKey = "investability" | "totalFunding" | "growthRate" | "riskScore" | "name";
 
-export default function CompaniesView({ companies, sectors }: { companies: Company[]; sectors: Sector[] }) {
-  const [search, setSearch] = useState("");
-  const [sectorFilter, setSectorFilter] = useState("all");
-  const [stageFilter, setStageFilter] = useState("all");
-  const [sortKey, setSortKey] = useState<SortKey>("investability");
-  const [sortAsc, setSortAsc] = useState(false);
+interface PaginationInfo {
+  page: number;
+  pageSize: number;
+  total: number;
+  totalPages: number;
+}
 
-  const stages = Array.from(new Set(companies.map((c) => c.stage)));
+interface Filters {
+  q?: string;
+  sectorId?: string;
+  stage?: string;
+  sortBy?: string;
+  order?: string;
+}
 
-  const filtered = companies
-    .filter((c) => {
-      const matchSearch =
-        c.name.toLowerCase().includes(search.toLowerCase()) ||
-        c.description.toLowerCase().includes(search.toLowerCase());
-      const matchSector = sectorFilter === "all" || c.sectorId === sectorFilter;
-      const matchStage = stageFilter === "all" || c.stage === stageFilter;
-      return matchSearch && matchSector && matchStage;
-    })
-    .sort((a, b) => {
-      if (sortKey === "name") {
-        return sortAsc ? a.name.localeCompare(b.name) : b.name.localeCompare(a.name);
+export default function CompaniesView({
+  companies,
+  sectors,
+  pagination,
+  currentFilters,
+}: {
+  companies: (Company & { sector?: Sector })[];
+  sectors: Sector[];
+  pagination: PaginationInfo;
+  currentFilters: Filters;
+}) {
+  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+  const [searchValue, setSearchValue] = useState(currentFilters.q ?? "");
+
+  useEffect(() => {
+    setSearchValue(currentFilters.q ?? "");
+  }, [currentFilters.q]);
+
+  const updateParams = useCallback(
+    (updates: Record<string, string | undefined>) => {
+      const params = new URLSearchParams(searchParams.toString());
+      for (const [k, v] of Object.entries(updates)) {
+        if (v) params.set(k, v);
+        else params.delete(k);
       }
-      const diff = (a[sortKey] as number) - (b[sortKey] as number);
-      return sortAsc ? diff : -diff;
-    });
+      if (!updates.page) params.delete("page");
+      router.push(`${pathname}?${params.toString()}`);
+    },
+    [router, pathname, searchParams]
+  );
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      const current = currentFilters.q ?? "";
+      if (searchValue !== current) {
+        updateParams({ q: searchValue || undefined, page: undefined });
+      }
+    }, 300);
+    return () => clearTimeout(timer);
+  }, [searchValue, currentFilters.q, updateParams]);
 
   const handleSort = (key: SortKey) => {
-    if (sortKey === key) setSortAsc(!sortAsc);
-    else {
-      setSortKey(key);
-      setSortAsc(false);
+    const currentSort = currentFilters.sortBy ?? "investability";
+    const currentOrder = currentFilters.order ?? "desc";
+    if (currentSort === key) {
+      updateParams({ sortBy: key, order: currentOrder === "desc" ? "asc" : "desc" });
+    } else {
+      updateParams({ sortBy: key, order: "desc" });
     }
   };
 
@@ -53,12 +89,21 @@ export default function CompaniesView({ companies, sectors }: { companies: Compa
     return "text-rose-400";
   };
 
+  const stages = ["Pre-Seed", "Seed", "Series A", "Series B", "Series C", "Growth"];
+
+  const filterParams: Record<string, string> = {};
+  if (currentFilters.q) filterParams.q = currentFilters.q;
+  if (currentFilters.sectorId) filterParams.sectorId = currentFilters.sectorId;
+  if (currentFilters.stage) filterParams.stage = currentFilters.stage;
+  if (currentFilters.sortBy) filterParams.sortBy = currentFilters.sortBy;
+  if (currentFilters.order) filterParams.order = currentFilters.order;
+
   return (
     <div className="p-8 space-y-6 max-w-[1400px] mx-auto">
       <div className="space-y-1">
         <h1 className="text-2xl font-bold text-white tracking-tight">Companies</h1>
         <p className="text-sm text-[#71717a]">
-          {companies.length} companies across {sectors.length} sectors
+          {pagination.total} companies across {sectors.length} sectors
         </p>
       </div>
 
@@ -68,15 +113,26 @@ export default function CompaniesView({ companies, sectors }: { companies: Compa
           <input
             type="text"
             placeholder="Search companies..."
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-            className="w-full pl-10 pr-4 py-2.5 bg-[#12121a] border border-[#1e1e2e] rounded-lg text-sm text-white placeholder:text-[#71717a] focus:outline-none focus:border-emerald-500/50 transition-colors"
+            value={searchValue}
+            onChange={(e) => setSearchValue(e.target.value)}
+            className="w-full pl-10 pr-9 py-2.5 bg-[#12121a] border border-[#1e1e2e] rounded-lg text-sm text-white placeholder:text-[#71717a] focus:outline-none focus:border-emerald-500/50 transition-colors"
           />
+          {searchValue && (
+            <button
+              onClick={() => {
+                setSearchValue("");
+                updateParams({ q: undefined, page: undefined });
+              }}
+              className="absolute right-3 top-1/2 -translate-y-1/2 text-[#71717a] hover:text-white transition-colors"
+            >
+              <X className="w-3.5 h-3.5" />
+            </button>
+          )}
         </div>
 
         <select
-          value={sectorFilter}
-          onChange={(e) => setSectorFilter(e.target.value)}
+          value={currentFilters.sectorId ?? "all"}
+          onChange={(e) => updateParams({ sectorId: e.target.value === "all" ? undefined : e.target.value, page: undefined })}
           className="px-4 py-2.5 bg-[#12121a] border border-[#1e1e2e] rounded-lg text-sm text-white focus:outline-none focus:border-emerald-500/50 transition-colors"
         >
           <option value="all">All Sectors</option>
@@ -86,8 +142,8 @@ export default function CompaniesView({ companies, sectors }: { companies: Compa
         </select>
 
         <select
-          value={stageFilter}
-          onChange={(e) => setStageFilter(e.target.value)}
+          value={currentFilters.stage ?? "all"}
+          onChange={(e) => updateParams({ stage: e.target.value === "all" ? undefined : e.target.value, page: undefined })}
           className="px-4 py-2.5 bg-[#12121a] border border-[#1e1e2e] rounded-lg text-sm text-white focus:outline-none focus:border-emerald-500/50 transition-colors"
         >
           <option value="all">All Stages</option>
@@ -95,10 +151,6 @@ export default function CompaniesView({ companies, sectors }: { companies: Compa
             <option key={s} value={s}>{s}</option>
           ))}
         </select>
-
-        <div className="text-xs text-[#71717a] ml-auto">
-          {filtered.length} results
-        </div>
       </div>
 
       <div className="glass rounded-xl overflow-hidden">
@@ -127,7 +179,7 @@ export default function CompaniesView({ companies, sectors }: { companies: Compa
               </tr>
             </thead>
             <tbody>
-              {filtered.map((company, i) => (
+              {companies.map((company, i) => (
                 <tr key={company.id} className="border-b border-[#1e1e2e]/50 hover:bg-white/[0.02] transition-colors animate-fade-in" style={{ animationDelay: `${i * 30}ms` }}>
                   <td className="px-5 py-4">
                     <div>
@@ -157,8 +209,25 @@ export default function CompaniesView({ companies, sectors }: { companies: Compa
                   </td>
                 </tr>
               ))}
+              {companies.length === 0 && (
+                <tr>
+                  <td colSpan={10} className="px-5 py-12 text-center text-sm text-[#71717a]">
+                    No companies found matching your search criteria.
+                  </td>
+                </tr>
+              )}
             </tbody>
           </table>
+        </div>
+
+        <div className="px-5 py-4 border-t border-[#1e1e2e]">
+          <Pagination
+            page={pagination.page}
+            totalPages={pagination.totalPages}
+            total={pagination.total}
+            baseUrl="/companies"
+            searchParams={filterParams}
+          />
         </div>
       </div>
     </div>

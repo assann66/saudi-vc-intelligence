@@ -11,6 +11,9 @@ export async function GET(request: Request) {
     const parsed = sectorsQuerySchema.safeParse({
       sortBy: searchParams.get("sortBy") ?? undefined,
       order: searchParams.get("order") ?? undefined,
+      q: searchParams.get("q") ?? undefined,
+      page: searchParams.get("page") ?? undefined,
+      pageSize: searchParams.get("pageSize") ?? undefined,
     });
 
     if (!parsed.success) {
@@ -20,16 +23,39 @@ export async function GET(request: Request) {
       );
     }
 
-    const { sortBy, order } = parsed.data;
+    const { sortBy, order, q, page, pageSize } = parsed.data;
 
-    const sectors = await prisma.sector.findMany({
-      orderBy: { [sortBy]: order },
-      include: {
-        _count: { select: { companies: true } },
+    const where: Record<string, unknown> = {};
+    if (q) {
+      where.OR = [
+        { name: { contains: q } },
+        { arabicName: { contains: q } },
+        { description: { contains: q } },
+      ];
+    }
+
+    const [sectors, total] = await Promise.all([
+      prisma.sector.findMany({
+        where,
+        orderBy: { [sortBy]: order },
+        include: {
+          _count: { select: { companies: true } },
+        },
+        skip: (page - 1) * pageSize,
+        take: pageSize,
+      }),
+      prisma.sector.count({ where }),
+    ]);
+
+    return NextResponse.json({
+      data: sectors,
+      pagination: {
+        page,
+        pageSize,
+        total,
+        totalPages: Math.ceil(total / pageSize),
       },
     });
-
-    return NextResponse.json(sectors);
   } catch (error) {
     console.error("خطأ في جلب القطاعات:", error);
     return NextResponse.json(
