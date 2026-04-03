@@ -1,7 +1,7 @@
 "use client";
 
-import { companies } from "@/data/companies";
-import { sectors } from "@/data/sectors";
+import type { Company } from "@/data/companies";
+import type { Sector } from "@/data/sectors";
 import { formatCurrency } from "@/lib/utils";
 import { cn } from "@/lib/utils";
 import { ArrowUpDown, ExternalLink } from "lucide-react";
@@ -10,7 +10,7 @@ import Link from "next/link";
 
 type SortKey = "investability" | "totalFunding" | "growthRate" | "riskScore";
 
-export function CompanyTable() {
+export function CompanyTable({ companies, sectors }: { companies: Company[]; sectors: Sector[] }) {
   const [sortKey, setSortKey] = useState<SortKey>("investability");
   const [sortAsc, setSortAsc] = useState(false);
 

@@ -1,34 +1,10 @@
-import type { Metadata } from "next";
-import { sectors } from "@/data/sectors";
-import { formatCurrency } from "@/lib/utils";
+import { getSectorById, getCompaniesBySector } from "@/lib/db";
 import SectorDeepDivePage from "./sector-deep-dive";
 
-export function generateStaticParams() {
-  return sectors.map((s) => ({ id: s.id }));
-}
+export const dynamic = "force-dynamic";
 
-export function generateMetadata({
-  params,
-}: {
-  params: { id: string };
-}): Metadata {
-  const sector = sectors.find((s) => s.id === params.id);
-  if (!sector) {
-    return { title: "Sector Not Found" };
-  }
-  const title = `${sector.name} — Saudi VC Sector Analysis`;
-  const description = `${sector.description} Attractiveness: ${sector.attractiveness}/100. Total funding: ${formatCurrency(sector.totalFunding)}. ${sector.companyCount} companies tracked.`;
-
-  return {
-    title,
-    description,
-    openGraph: {
-      title,
-      description,
-    },
-  };
-}
-
-export default function Page() {
-  return <SectorDeepDivePage />;
+export default async function Page({ params }: { params: { id: string } }) {
+  const sector = await getSectorById(params.id);
+  const sectorCompanies = sector ? await getCompaniesBySector(sector.id) : [];
+  return <SectorDeepDivePage sector={sector} sectorCompanies={sectorCompanies} />;
 }

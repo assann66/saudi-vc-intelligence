@@ -1,9 +1,8 @@
 "use client";
 
-import { useParams } from "next/navigation";
 import Link from "next/link";
-import { companies } from "@/data/companies";
-import { sectors } from "@/data/sectors";
+import type { Company } from "@/data/companies";
+import type { Sector } from "@/data/sectors";
 import { analyzeCompany } from "@/lib/scoring";
 import { formatCurrency, cn } from "@/lib/utils";
 import { useMemo } from "react";
@@ -33,15 +32,7 @@ import {
   ResponsiveContainer,
 } from "recharts";
 
-export default function CompanyDeepDivePage() {
-  const params = useParams();
-  const companyId = params.id as string;
-  const company = companies.find((c) => c.id === companyId);
-  const sector = company ? sectors.find((s) => s.id === company.sectorId) : null;
-  const sectorCompanies = useMemo(
-    () => (company ? companies.filter((c) => c.sectorId === company.sectorId) : []),
-    [company]
-  );
+export default function CompanyDeepDivePage({ company, sector, sectorCompanies }: { company: Company | null; sector: Sector | null; sectorCompanies: Company[] }) {
 
   const analysis = useMemo(
     () => (company && sector ? analyzeCompany(company, sector, sectorCompanies) : null),

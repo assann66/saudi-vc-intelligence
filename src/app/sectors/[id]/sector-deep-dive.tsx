@@ -1,9 +1,8 @@
 "use client";
 
-import { useParams } from "next/navigation";
 import Link from "next/link";
-import { sectors } from "@/data/sectors";
-import { companies } from "@/data/companies";
+import type { Sector } from "@/data/sectors";
+import type { Company } from "@/data/companies";
 import { analyzeSector } from "@/lib/scoring";
 import { formatCurrency, cn } from "@/lib/utils";
 import { useMemo } from "react";
@@ -36,14 +35,7 @@ import {
   Tooltip,
 } from "recharts";
 
-export default function SectorDeepDivePage() {
-  const params = useParams();
-  const sectorId = params.id as string;
-  const sector = sectors.find((s) => s.id === sectorId);
-  const sectorCompanies = useMemo(
-    () => companies.filter((c) => c.sectorId === sectorId).sort((a, b) => b.investability - a.investability),
-    [sectorId]
-  );
+export default function SectorDeepDivePage({ sector, sectorCompanies }: { sector: Sector | null; sectorCompanies: Company[] }) {
 
   const analysis = useMemo(
     () => (sector ? analyzeSector(sector, sectorCompanies) : null),

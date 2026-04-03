@@ -15,39 +15,8 @@ import {
   Radar,
   Legend,
 } from "recharts";
-import { sectors } from "@/data/sectors";
-import { useState } from "react";
-
-const barData = sectors
-  .sort((a, b) => b.attractiveness - a.attractiveness)
-  .map((s) => ({
-    name: s.name,
-    attractiveness: s.attractiveness,
-    saudiRelevance: s.saudiRelevance,
-    fundingMomentum: s.fundingMomentum,
-  }));
-
-const topSectors = sectors
-  .sort((a, b) => b.attractiveness - a.attractiveness)
-  .slice(0, 5);
-
-const radarData = [
-  "attractiveness",
-  "saudiRelevance",
-  "fundingMomentum",
-  "marketGap",
-  "competitionIntensity",
-].map((key) => {
-  const point: Record<string, string | number> = {
-    metric: key
-      .replace(/([A-Z])/g, " $1")
-      .replace(/^./, (s) => s.toUpperCase()),
-  };
-  topSectors.forEach((s) => {
-    point[s.name] = s[key as keyof typeof s] as number;
-  });
-  return point;
-});
+import type { Sector } from "@/data/sectors";
+import { useState, useMemo } from "react";
 
 const COLORS = ["#10b981", "#06b6d4", "#8b5cf6", "#f59e0b", "#f43f5e"];
 
@@ -72,8 +41,39 @@ const CustomTooltip = ({ active, payload, label }: any) => {
   );
 };
 
-export function SectorChart() {
+export function SectorChart({ sectors }: { sectors: Sector[] }) {
   const [view, setView] = useState<"bar" | "radar">("bar");
+
+  const barData = useMemo(() => [...sectors]
+    .sort((a, b) => b.attractiveness - a.attractiveness)
+    .map((s) => ({
+      name: s.name,
+      attractiveness: s.attractiveness,
+      saudiRelevance: s.saudiRelevance,
+      fundingMomentum: s.fundingMomentum,
+    })), [sectors]);
+
+  const topSectors = useMemo(() => [...sectors]
+    .sort((a, b) => b.attractiveness - a.attractiveness)
+    .slice(0, 5), [sectors]);
+
+  const radarData = useMemo(() => [
+    "attractiveness",
+    "saudiRelevance",
+    "fundingMomentum",
+    "marketGap",
+    "competitionIntensity",
+  ].map((key) => {
+    const point: Record<string, string | number> = {
+      metric: key
+        .replace(/([A-Z])/g, " $1")
+        .replace(/^./, (s) => s.toUpperCase()),
+    };
+    topSectors.forEach((s) => {
+      point[s.name] = s[key as keyof typeof s] as number;
+    });
+    return point;
+  }), [topSectors]);
 
   return (
     <div className="glass rounded-xl p-6 animate-fade-in" style={{ animationDelay: "400ms" }}>

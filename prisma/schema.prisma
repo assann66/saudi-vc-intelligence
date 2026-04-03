@@ -1,0 +1,54 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("SQLITE_URL")
+}
+
+model Sector {
+  id                   String    @id
+  name                 String
+  arabicName           String
+  attractiveness       Int
+  riskScore            Int
+  marketGap            Int
+  fundingMomentum      Int
+  competitionIntensity Int
+  saudiRelevance       Int
+  totalFunding         Float
+  companyCount         Int
+  avgDealSize          Float
+  yoyGrowth            Int
+  description          String
+  createdAt            DateTime  @default(now())
+  updatedAt            DateTime  @updatedAt
+  companies            Company[]
+}
+
+model Company {
+  id             String   @id
+  name           String
+  arabicName     String
+  sectorId       String
+  stage          String
+  foundedYear    Int
+  totalFunding   Float
+  lastRoundSize  Float
+  lastRoundDate  String
+  investability  Int
+  riskScore      Int
+  growthRate     Int
+  employees      Int
+  hqCity         String
+  description    String
+  investors      String
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+  sector         Sector   @relation(fields: [sectorId], references: [id])
+
+  @@index([sectorId])
+  @@index([investability])
+  @@index([stage])
+}

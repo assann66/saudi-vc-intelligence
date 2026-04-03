@@ -5,12 +5,9 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: 'export',
-  basePath: '/saudi-vc-intelligence',
   images: {
     unoptimized: true,
   },
-  staticPageGenerationTimeout: 120,
   webpack: (config) => {
     config.resolve.alias['@'] = path.join(__dirname, 'src');
     return config;
