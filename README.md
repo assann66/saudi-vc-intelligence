@@ -2,6 +2,8 @@
 
 Executive intelligence dashboard for the Saudi Arabian venture capital ecosystem.
 
+**Live:** [saudi-vc-intelligence.vercel.app](https://saudi-vc-intelligence.vercel.app)
+
 ## Stack
 
 - **Framework:** Next.js 14 (App Router)
