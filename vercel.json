@@ -1,0 +1,13 @@
+{
+  "functions": {
+    "src/app/api/**/*.ts": {
+      "includeFiles": "prisma/dev.db"
+    },
+    "src/app/page.tsx": {
+      "includeFiles": "prisma/dev.db"
+    },
+    "src/app/**/page.tsx": {
+      "includeFiles": "prisma/dev.db"
+    }
+  }
+}

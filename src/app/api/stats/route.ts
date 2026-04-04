@@ -1,5 +1,7 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
+import { companies as staticCompanies } from "@/data/companies";
+import { sectors as staticSectors } from "@/data/sectors";
 
 export const dynamic = "force-dynamic";
 
@@ -25,11 +27,17 @@ export async function GET() {
       totalEmployees,
       avgGrowth,
     });
-  } catch (error) {
-    console.error("خطأ في جلب الإحصائيات:", error);
-    return NextResponse.json(
-      { error: "حدث خطأ في الخادم أثناء جلب الإحصائيات" },
-      { status: 500 }
-    );
+  } catch {
+    const totalFunding = staticSectors.reduce((sum, s) => sum + s.totalFunding, 0);
+    const totalEmployees = staticCompanies.reduce((sum, c) => sum + c.employees, 0);
+    const avgGrowth = Math.round(staticSectors.reduce((sum, s) => sum + s.yoyGrowth, 0) / staticSectors.length);
+
+    return NextResponse.json({
+      companyCount: staticCompanies.length,
+      sectorCount: staticSectors.length,
+      totalFunding,
+      totalEmployees,
+      avgGrowth,
+    });
   }
 }
