@@ -8,7 +8,7 @@ export default withAuth(
 
     // Admin-only routes
     if (path.startsWith("/admin") && token?.role !== "admin") {
-      return NextResponse.redirect(new URL("/", req.url));
+      return NextResponse.redirect(new URL("/login", req.url));
     }
 
     return NextResponse.next();
@@ -21,14 +21,5 @@ export default withAuth(
 );
 
 export const config = {
-  matcher: [
-    /*
-     * Protect all routes except:
-     * - /login
-     * - /api/auth (NextAuth routes)
-     * - /_next (Next.js internals)
-     * - /favicon.ico, /images, etc.
-     */
-    "/((?!login|api/auth|_next|favicon\\.ico|images).*)",
-  ],
+  matcher: ["/admin/:path*"],
 };

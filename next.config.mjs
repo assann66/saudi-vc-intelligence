@@ -12,6 +12,11 @@ const nextConfig = {
     config.resolve.alias['@'] = path.join(__dirname, 'src');
     return config;
   },
+  experimental: {
+    outputFileTracingIncludes: {
+      '/*': ['./prisma/dev.db'],
+    },
+  },
 };
 
 export default nextConfig;
