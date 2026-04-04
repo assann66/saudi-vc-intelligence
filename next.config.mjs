@@ -14,7 +14,18 @@ const nextConfig = {
   },
   experimental: {
     outputFileTracingIncludes: {
-      '/*': ['./prisma/dev.db'],
+      '/': ['./prisma/dev.db'],
+      '/api/*': ['./prisma/dev.db'],
+      '/companies': ['./prisma/dev.db'],
+      '/companies/*': ['./prisma/dev.db'],
+      '/sectors': ['./prisma/dev.db'],
+      '/sectors/*': ['./prisma/dev.db'],
+      '/rankings': ['./prisma/dev.db'],
+      '/reports': ['./prisma/dev.db'],
+      '/risk-insights': ['./prisma/dev.db'],
+      '/compare': ['./prisma/dev.db'],
+      '/admin': ['./prisma/dev.db'],
+      '/admin/*': ['./prisma/dev.db'],
     },
   },
 };
