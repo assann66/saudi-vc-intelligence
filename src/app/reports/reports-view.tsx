@@ -72,12 +72,12 @@ export default function ReportsView({ companies, sectors }: { companies: Company
         <div className="space-y-1">
           <div className="flex items-center gap-3">
             <FileText className="w-6 h-6 text-violet-400" />
-            <h1 className="text-2xl font-bold text-white tracking-tight">
-              Executive Reports
+            <h1 className="text-2xl font-bold font-heading text-white tracking-tight">
+              التقارير التنفيذية
             </h1>
           </div>
           <p className="text-sm text-[#71717a]">
-            Generate polished investment intelligence summaries
+            إعداد ملخصات ذكاء استثماري احترافية
           </p>
         </div>
         <button
@@ -85,16 +85,16 @@ export default function ReportsView({ companies, sectors }: { companies: Company
           className="flex items-center gap-2 px-4 py-2.5 bg-emerald-500/10 border border-emerald-500/20 rounded-lg text-sm font-medium text-emerald-400 hover:bg-emerald-500/20 transition-colors print:hidden"
         >
           <Download className="w-4 h-4" />
-          Export PDF
+          تصدير PDF
         </button>
       </div>
 
       {/* Report Controls */}
       <div className="flex flex-wrap gap-3 items-center print:hidden">
         {[
-          { key: "top-opportunities" as ReportType, label: "Top Opportunities", icon: Star },
-          { key: "sector-overview" as ReportType, label: "Sector Overview", icon: Target },
-          { key: "risk-assessment" as ReportType, label: "Risk Assessment", icon: Shield },
+          { key: "top-opportunities" as ReportType, label: "أبرز الفرص", icon: Star },
+          { key: "sector-overview" as ReportType, label: "نظرة عامة على القطاعات", icon: Target },
+          { key: "risk-assessment" as ReportType, label: "تقييم المخاطر", icon: Shield },
         ].map(({ key, label, icon: Icon }) => (
           <button
             key={key}
@@ -113,7 +113,7 @@ export default function ReportsView({ companies, sectors }: { companies: Company
 
         {reportType === "top-opportunities" && (
           <div className="flex items-center gap-2 ml-auto">
-            <span className="text-xs text-[#71717a]">Show top:</span>
+            <span className="text-xs text-[#71717a]">عرض الأبرز:</span>
             <select
               value={topN}
               onChange={(e) => setTopN(Number(e.target.value))}
@@ -137,32 +137,32 @@ export default function ReportsView({ companies, sectors }: { companies: Company
               <Zap className="w-5 h-5 text-white" />
             </div>
             <div>
-              <h2 className="text-lg font-bold text-white">Saudi VC Intelligence Report</h2>
+              <h2 className="text-lg font-bold font-heading text-white">تقرير ذكاء رأس المال الجريء السعودي</h2>
               <p className="text-xs text-[#71717a]">
-                Generated April 1, 2026 &middot;{" "}
+                صدر في ١ أبريل ٢٠٢٦ &middot;{" "}
                 {reportType === "top-opportunities"
-                  ? "Top Investment Opportunities"
+                  ? "أبرز فرص الاستثمار"
                   : reportType === "sector-overview"
-                  ? "Sector Landscape Overview"
-                  : "Risk Assessment Summary"}
+                  ? "نظرة عامة على مشهد القطاعات"
+                  : "ملخص تقييم المخاطر"}
               </p>
             </div>
           </div>
           <div className="grid grid-cols-4 gap-6 mt-6">
             <div>
-              <p className="text-[10px] text-[#71717a] uppercase tracking-widest">Total Market</p>
+              <p className="text-[10px] text-[#71717a] uppercase tracking-widest">إجمالي السوق</p>
               <p className="text-xl font-bold text-white mt-1">{formatCurrency(totalMarketFunding)}</p>
             </div>
             <div>
-              <p className="text-[10px] text-[#71717a] uppercase tracking-widest">Sectors Tracked</p>
+              <p className="text-[10px] text-[#71717a] uppercase tracking-widest">القطاعات المتابعة</p>
               <p className="text-xl font-bold text-white mt-1">{sectors.length}</p>
             </div>
             <div>
-              <p className="text-[10px] text-[#71717a] uppercase tracking-widest">Companies Analyzed</p>
+              <p className="text-[10px] text-[#71717a] uppercase tracking-widest">الشركات المحللة</p>
               <p className="text-xl font-bold text-white mt-1">{companies.length}</p>
             </div>
             <div>
-              <p className="text-[10px] text-[#71717a] uppercase tracking-widest">Avg. YoY Growth</p>
+              <p className="text-[10px] text-[#71717a] uppercase tracking-widest">متوسط النمو السنوي</p>
               <p className="text-xl font-bold text-emerald-400 mt-1">+{avgGrowth.toFixed(0)}%</p>
             </div>
           </div>
@@ -172,7 +172,7 @@ export default function ReportsView({ companies, sectors }: { companies: Company
         {reportType === "top-opportunities" && (
           <div className="space-y-4">
             <div className="glass rounded-xl p-6">
-              <h3 className="text-sm font-semibold text-white mb-1">Executive Summary</h3>
+              <h3 className="text-sm font-semibold font-heading text-white mb-1">الملخص التنفيذي</h3>
               <p className="text-sm text-[#a1a1aa] leading-relaxed">
                 Analysis of {companies.length} companies across {sectors.length} sectors identifies{" "}
                 <span className="text-emerald-400 font-medium">{strongBuys.length} Strong Buy</span> and{" "}
@@ -186,19 +186,19 @@ export default function ReportsView({ companies, sectors }: { companies: Company
 
             <div className="glass rounded-xl overflow-hidden">
               <div className="px-6 py-4 border-b border-[#1e1e2e]">
-                <h3 className="text-sm font-semibold text-white">Top {topN} Investment Opportunities</h3>
+                <h3 className="text-sm font-semibold font-heading text-white">أبرز {topN} فرصة استثمارية</h3>
               </div>
               <table className="w-full">
                 <thead>
                   <tr className="border-b border-[#1e1e2e]">
                     <th className="px-6 py-3 text-left text-[10px] font-semibold uppercase tracking-widest text-[#71717a]">#</th>
-                    <th className="px-6 py-3 text-left text-[10px] font-semibold uppercase tracking-widest text-[#71717a]">Company</th>
-                    <th className="px-6 py-3 text-left text-[10px] font-semibold uppercase tracking-widest text-[#71717a]">Sector</th>
-                    <th className="px-6 py-3 text-right text-[10px] font-semibold uppercase tracking-widest text-[#71717a]">Investability</th>
-                    <th className="px-6 py-3 text-right text-[10px] font-semibold uppercase tracking-widest text-[#71717a]">Risk</th>
-                    <th className="px-6 py-3 text-right text-[10px] font-semibold uppercase tracking-widest text-[#71717a]">Growth</th>
-                    <th className="px-6 py-3 text-right text-[10px] font-semibold uppercase tracking-widest text-[#71717a]">Funding</th>
-                    <th className="px-6 py-3 text-right text-[10px] font-semibold uppercase tracking-widest text-[#71717a]">Signal</th>
+                    <th className="px-6 py-3 text-left text-[10px] font-semibold uppercase tracking-widest text-[#71717a]">الشركة</th>
+                    <th className="px-6 py-3 text-left text-[10px] font-semibold uppercase tracking-widest text-[#71717a]">القطاع</th>
+                    <th className="px-6 py-3 text-right text-[10px] font-semibold uppercase tracking-widest text-[#71717a]">الاستثمار</th>
+                    <th className="px-6 py-3 text-right text-[10px] font-semibold uppercase tracking-widest text-[#71717a]">المخاطر</th>
+                    <th className="px-6 py-3 text-right text-[10px] font-semibold uppercase tracking-widest text-[#71717a]">النمو</th>
+                    <th className="px-6 py-3 text-right text-[10px] font-semibold uppercase tracking-widest text-[#71717a]">التمويل</th>
+                    <th className="px-6 py-3 text-right text-[10px] font-semibold uppercase tracking-widest text-[#71717a]">الإشارة</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -247,13 +247,13 @@ export default function ReportsView({ companies, sectors }: { companies: Company
                   <p className="text-sm text-[#a1a1aa] leading-relaxed mb-3">{analysis.investmentThesis}</p>
                   <div className="grid grid-cols-2 gap-4">
                     <div>
-                      <p className="text-[10px] text-emerald-400 uppercase tracking-widest mb-1.5">Strengths</p>
+                      <p className="text-[10px] text-emerald-400 uppercase tracking-widest mb-1.5">نقاط القوة</p>
                       {analysis.strengths.slice(0, 3).map((s, idx) => (
                         <p key={idx} className="text-xs text-[#a1a1aa] mb-1">+ {s}</p>
                       ))}
                     </div>
                     <div>
-                      <p className="text-[10px] text-rose-400 uppercase tracking-widest mb-1.5">Risks</p>
+                      <p className="text-[10px] text-rose-400 uppercase tracking-widest mb-1.5">المخاطر</p>
                       {analysis.risks.slice(0, 3).map((r, idx) => (
                         <p key={idx} className="text-xs text-[#a1a1aa] mb-1">- {r}</p>
                       ))}
@@ -269,7 +269,7 @@ export default function ReportsView({ companies, sectors }: { companies: Company
         {reportType === "sector-overview" && (
           <div className="space-y-4">
             <div className="glass rounded-xl p-6">
-              <h3 className="text-sm font-semibold text-white mb-1">Sector Landscape Summary</h3>
+              <h3 className="text-sm font-semibold font-heading text-white mb-1">ملخص مشهد القطاعات</h3>
               <p className="text-sm text-[#a1a1aa] leading-relaxed">
                 The Saudi VC ecosystem spans {sectors.length} key sectors with{" "}
                 {formatCurrency(totalMarketFunding)} in total tracked funding. FinTech leads in
@@ -289,15 +289,15 @@ export default function ReportsView({ companies, sectors }: { companies: Company
                   </div>
                   <div className="flex gap-4 text-right">
                     <div>
-                      <p className="text-[10px] text-[#71717a] uppercase tracking-widest">Attractiveness</p>
+                      <p className="text-[10px] text-[#71717a] uppercase tracking-widest">الجاذبية</p>
                       <p className={cn("text-lg font-bold", getScoreColor(sector.attractiveness))}>{sector.attractiveness}</p>
                     </div>
                     <div>
-                      <p className="text-[10px] text-[#71717a] uppercase tracking-widest">Funding</p>
+                      <p className="text-[10px] text-[#71717a] uppercase tracking-widest">التمويل</p>
                       <p className="text-lg font-bold text-white">{formatCurrency(sector.totalFunding)}</p>
                     </div>
                     <div>
-                      <p className="text-[10px] text-[#71717a] uppercase tracking-widest">YoY Growth</p>
+                      <p className="text-[10px] text-[#71717a] uppercase tracking-widest">النمو السنوي</p>
                       <p className={cn("text-lg font-bold", getScoreColor(sector.yoyGrowth))}>+{sector.yoyGrowth}%</p>
                     </div>
                   </div>
@@ -305,12 +305,12 @@ export default function ReportsView({ companies, sectors }: { companies: Company
                 <p className="text-sm text-[#a1a1aa] leading-relaxed mb-3">{analysis.overallVerdict}</p>
                 <div className="grid grid-cols-6 gap-3 mb-3">
                   {[
-                    { label: "Risk", score: sector.riskScore, inverse: true },
-                    { label: "Mkt Gap", score: sector.marketGap },
-                    { label: "Momentum", score: sector.fundingMomentum },
-                    { label: "Competition", score: sector.competitionIntensity, inverse: true },
-                    { label: "Saudi Rel.", score: sector.saudiRelevance },
-                    { label: "Companies", score: sectorCos.length, raw: true },
+                    { label: "المخاطر", score: sector.riskScore, inverse: true },
+                    { label: "الفجوة السوقية", score: sector.marketGap },
+                    { label: "الزخم", score: sector.fundingMomentum },
+                    { label: "المنافسة", score: sector.competitionIntensity, inverse: true },
+                    { label: "الملاءمة السعودية", score: sector.saudiRelevance },
+                    { label: "الشركات", score: sectorCos.length, raw: true },
                   ].map(({ label, score, inverse, raw }) => (
                     <div key={label} className="text-center">
                       <p className="text-[10px] text-[#71717a] uppercase tracking-widest">{label}</p>
@@ -322,13 +322,13 @@ export default function ReportsView({ companies, sectors }: { companies: Company
                 </div>
                 <div className="grid grid-cols-2 gap-4">
                   <div>
-                    <p className="text-[10px] text-emerald-400 uppercase tracking-widest mb-1">Opportunities</p>
+                    <p className="text-[10px] text-emerald-400 uppercase tracking-widest mb-1">الفرص</p>
                     {analysis.keyOpportunities.slice(0, 2).map((o, i) => (
                       <p key={i} className="text-xs text-[#a1a1aa] mb-0.5">+ {o}</p>
                     ))}
                   </div>
                   <div>
-                    <p className="text-[10px] text-rose-400 uppercase tracking-widest mb-1">Risks</p>
+                    <p className="text-[10px] text-rose-400 uppercase tracking-widest mb-1">المخاطر</p>
                     {analysis.keyRisks.slice(0, 2).map((r, i) => (
                       <p key={i} className="text-xs text-[#a1a1aa] mb-0.5">- {r}</p>
                     ))}
@@ -343,7 +343,7 @@ export default function ReportsView({ companies, sectors }: { companies: Company
         {reportType === "risk-assessment" && (
           <div className="space-y-4">
             <div className="glass rounded-xl p-6">
-              <h3 className="text-sm font-semibold text-white mb-1">Risk Assessment Overview</h3>
+              <h3 className="text-sm font-semibold font-heading text-white mb-1">نظرة عامة على تقييم المخاطر</h3>
               <p className="text-sm text-[#a1a1aa] leading-relaxed">
                 Comprehensive risk analysis across {companies.length} companies and {sectors.length}{" "}
                 sectors. Entertainment & Sports Tech carries the highest sector risk (55/100), while
@@ -356,7 +356,7 @@ export default function ReportsView({ companies, sectors }: { companies: Company
             {/* High Risk Companies */}
             <div className="glass rounded-xl p-6">
               <h4 className="text-sm font-semibold text-rose-400 mb-4 flex items-center gap-2">
-                <Shield className="w-4 h-4" /> Elevated Risk Companies (Risk Score {"\u2265"} 45)
+                <Shield className="w-4 h-4" /> شركات مرتفعة المخاطر (مؤشر المخاطر {"\u2265"} ٤٥)
               </h4>
               <div className="space-y-3">
                 {companyAnalyses
@@ -383,7 +383,7 @@ export default function ReportsView({ companies, sectors }: { companies: Company
 
             {/* Sector Risk Ranking */}
             <div className="glass rounded-xl p-6">
-              <h4 className="text-sm font-semibold text-white mb-4">Sector Risk Ranking (Low to High)</h4>
+              <h4 className="text-sm font-semibold text-white mb-4">تصنيف مخاطر القطاعات (من الأقل إلى الأعلى)</h4>
               <div className="space-y-2">
                 {[...sectors]
                   .sort((a, b) => a.riskScore - b.riskScore)
@@ -412,7 +412,7 @@ export default function ReportsView({ companies, sectors }: { companies: Company
                           </span>
                         </div>
                         <div className="w-24 text-right text-xs text-[#71717a]">
-                          Avg Co: {avgCompanyRisk.toFixed(0)}
+                          متوسط الشركة: {avgCompanyRisk.toFixed(0)}
                         </div>
                       </div>
                     );
@@ -423,7 +423,7 @@ export default function ReportsView({ companies, sectors }: { companies: Company
             {/* Underfunded Sectors */}
             <div className="glass rounded-xl p-6">
               <h4 className="text-sm font-semibold text-amber-400 mb-4 flex items-center gap-2">
-                <Target className="w-4 h-4" /> Market Gaps & Underfunded Opportunities
+                <Target className="w-4 h-4" /> الفجوات السوقية والفرص ناقصة التمويل
               </h4>
               <div className="grid grid-cols-2 gap-4">
                 {sectorAnalyses
@@ -434,16 +434,16 @@ export default function ReportsView({ companies, sectors }: { companies: Company
                       <div className="flex items-center justify-between mb-2">
                         <p className="text-sm font-medium text-white">{sector.name}</p>
                         <span className={cn("text-sm font-bold", getScoreColor(sector.marketGap))}>
-                          Gap: {sector.marketGap}
+                          الفجوة: {sector.marketGap}
                         </span>
                       </div>
                       <p className="text-xs text-[#a1a1aa] leading-relaxed">{sector.description}</p>
                       <div className="flex gap-4 mt-2">
                         <span className="text-[10px] text-[#71717a]">
-                          Funding: {formatCurrency(sector.totalFunding)}
+                          التمويل: {formatCurrency(sector.totalFunding)}
                         </span>
                         <span className="text-[10px] text-[#71717a]">
-                          Competition: {sector.competitionIntensity}/100
+                          المنافسة: {sector.competitionIntensity}/100
                         </span>
                       </div>
                     </div>
@@ -456,7 +456,7 @@ export default function ReportsView({ companies, sectors }: { companies: Company
         {/* Footer */}
         <div className="glass rounded-xl p-4 text-center">
           <p className="text-[10px] text-[#71717a]">
-            Saudi VC Intelligence Platform &middot; Confidential Report &middot; Generated April 1, 2026 &middot; Data sources: proprietary analysis engine
+            منصة ذكاء رأس المال الجريء السعودي &middot; تقرير سري &middot; صدر في ١ أبريل ٢٠٢٦ &middot; المصادر: محرك التحليل الخاص
           </p>
         </div>
       </div>

@@ -61,19 +61,19 @@ export default function SectorsView({
     <div className="p-8 space-y-8 max-w-[1400px] mx-auto">
       <div className="flex flex-wrap items-end justify-between gap-4">
         <div className="space-y-1">
-          <h1 className="text-2xl font-bold text-white tracking-tight">Sector Overview</h1>
+          <h1 className="text-2xl font-bold text-white tracking-tight font-heading">نظرة عامة على القطاعات</h1>
           <p className="text-sm text-[#71717a]">
-            {pagination.total} Saudi VC sectors ranked by attractiveness
+            {pagination.total} قطاع في منظومة رأس المال الجريء السعودي مرتبة حسب الجاذبية
           </p>
         </div>
         <div className="relative min-w-[240px] max-w-sm">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#71717a]" />
+          <Search className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#71717a]" />
           <input
             type="text"
-            placeholder="Search sectors..."
+            placeholder="البحث في القطاعات..."
             value={searchValue}
             onChange={(e) => setSearchValue(e.target.value)}
-            className="w-full pl-10 pr-9 py-2.5 bg-[#12121a] border border-[#1e1e2e] rounded-lg text-sm text-white placeholder:text-[#71717a] focus:outline-none focus:border-emerald-500/50 transition-colors"
+            className="w-full pr-10 pl-9 py-2.5 bg-[#12121a] border border-[#1e1e2e] rounded-lg text-sm text-white placeholder:text-[#71717a] focus:outline-none focus:border-emerald-500/50 transition-colors"
           />
           {searchValue && (
             <button
@@ -81,7 +81,7 @@ export default function SectorsView({
                 setSearchValue("");
                 updateSearch("");
               }}
-              className="absolute right-3 top-1/2 -translate-y-1/2 text-[#71717a] hover:text-white transition-colors"
+              className="absolute left-3 top-1/2 -translate-y-1/2 text-[#71717a] hover:text-white transition-colors"
             >
               <X className="w-3.5 h-3.5" />
             </button>
@@ -99,8 +99,8 @@ export default function SectorsView({
           >
             <div className="flex items-start justify-between mb-4">
               <div>
-                <h3 className="text-base font-semibold text-white">{sector.name}</h3>
-                <p className="text-xs text-emerald-400/70 font-medium">{sector.arabicName}</p>
+                <h3 className="text-base font-semibold text-white font-heading">{sector.arabicName || sector.name}</h3>
+                <p className="text-xs text-emerald-400/70 font-medium">{sector.name}</p>
               </div>
               <div className="flex items-center gap-1.5 bg-emerald-500/10 px-2 py-1 rounded-full">
                 <TrendingUp className="w-3 h-3 text-emerald-400" />
@@ -116,14 +116,14 @@ export default function SectorsView({
 
             <div className="space-y-3 mb-5">
               {[
-                { label: "Attractiveness", value: sector.attractiveness, color: "bg-emerald-500" },
-                { label: "Saudi Relevance", value: sector.saudiRelevance, color: "bg-cyan-500" },
-                { label: "Funding Momentum", value: sector.fundingMomentum, color: "bg-violet-500" },
-                { label: "Market Gap", value: sector.marketGap, color: "bg-amber-500" },
+                { label: "الجاذبية", value: sector.attractiveness, color: "bg-[#2ECC71]" },
+                { label: "الملاءمة السعودية", value: sector.saudiRelevance, color: "bg-[#1E3A5F]" },
+                { label: "زخم التمويل", value: sector.fundingMomentum, color: "bg-[#F39C12]" },
+                { label: "الفجوة السوقية", value: sector.marketGap, color: "bg-amber-500" },
               ].map((metric) => (
                 <div key={metric.label}>
                   <div className="flex justify-between mb-1">
-                    <span className="text-[10px] text-[#71717a] uppercase tracking-wider">
+                    <span className="text-[10px] text-[#71717a] tracking-wider">
                       {metric.label}
                     </span>
                     <span className="text-[10px] font-semibold text-white">
@@ -148,14 +148,14 @@ export default function SectorsView({
                 <p className="text-sm font-semibold text-white">
                   {formatCurrency(sector.totalFunding)}
                 </p>
-                <p className="text-[9px] text-[#71717a] uppercase">Total Funded</p>
+                <p className="text-[9px] text-[#71717a]">إجمالي التمويل</p>
               </div>
               <div className="text-center">
                 <div className="flex items-center justify-center gap-1 mb-1">
                   <Building2 className="w-3 h-3 text-[#71717a]" />
                 </div>
                 <p className="text-sm font-semibold text-white">{sector.companyCount}</p>
-                <p className="text-[9px] text-[#71717a] uppercase">Companies</p>
+                <p className="text-[9px] text-[#71717a]">الشركات</p>
               </div>
               <div className="text-center">
                 <div className="flex items-center justify-center gap-1 mb-1">
@@ -164,7 +164,7 @@ export default function SectorsView({
                 <p className="text-sm font-semibold text-white">
                   {formatCurrency(sector.avgDealSize)}
                 </p>
-                <p className="text-[9px] text-[#71717a] uppercase">Avg Deal</p>
+                <p className="text-[9px] text-[#71717a]">متوسط الصفقة</p>
               </div>
             </div>
           </Link>
@@ -173,7 +173,7 @@ export default function SectorsView({
 
       {sectors.length === 0 && (
         <div className="text-center py-12 text-sm text-[#71717a]">
-          No sectors found matching your search.
+          لم يتم العثور على قطاعات مطابقة للبحث.
         </div>
       )}
 

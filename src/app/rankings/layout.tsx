@@ -1,13 +1,13 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Rankings — Top Saudi VC Companies & Sectors",
+  title: "التصنيفات — أبرز شركات وقطاعات رأس المال الجريء السعودي",
   description:
-    "AI-ranked leaderboard of Saudi Arabia's top venture-backed companies and sectors by investability, growth rate, risk score, and Vision 2030 alignment.",
+    "قائمة مصنفة بالذكاء الاصطناعي لأبرز الشركات والقطاعات المدعومة برأس المال الجريء في المملكة العربية السعودية حسب قابلية الاستثمار ومعدل النمو ومؤشر المخاطر وتوافق رؤية 2030.",
   openGraph: {
-    title: "Rankings — Top Saudi VC Companies & Sectors",
+    title: "التصنيفات — أبرز شركات وقطاعات رأس المال الجريء السعودي",
     description:
-      "AI-ranked leaderboard of Saudi Arabia's top venture-backed companies and sectors by investability, growth rate, risk score, and Vision 2030 alignment.",
+      "قائمة مصنفة بالذكاء الاصطناعي لأبرز الشركات والقطاعات المدعومة برأس المال الجريء في المملكة العربية السعودية.",
   },
 };
 

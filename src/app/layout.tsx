@@ -10,54 +10,54 @@ const siteUrl = "https://assann66.github.io/saudi-vc-intelligence";
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  themeColor: "#0a0a0f",
+  themeColor: "#1E3A5F",
 };
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: "Saudi VC Intelligence Platform",
-    template: "%s | Saudi VC Intelligence",
+    default: "منصة ذكاء رأس المال الجريء السعودي",
+    template: "%s | ذكاء رأس المال الجريء",
   },
   description:
-    "AI-powered investment intelligence platform for Saudi Arabian venture capital analysis. Track sectors, companies, and opportunities across the Kingdom's VC ecosystem.",
+    "منصة ذكاء استثماري مدعومة بالذكاء الاصطناعي لتحليل رأس المال الجريء في المملكة العربية السعودية. تتبع القطاعات والشركات والفرص عبر منظومة رأس المال الجريء في المملكة.",
   keywords: [
-    "Saudi Arabia",
-    "venture capital",
-    "VC intelligence",
-    "investment analysis",
-    "Vision 2030",
-    "startup ecosystem",
+    "المملكة العربية السعودية",
+    "رأس المال الجريء",
+    "ذكاء استثماري",
+    "تحليل استثماري",
+    "رؤية 2030",
+    "منظومة الشركات الناشئة",
     "Saudi VC",
     "fintech",
     "AI analytics",
-    "Saudi startups",
-    "MENA venture capital",
+    "الشركات الناشئة السعودية",
+    "رأس المال الجريء في الشرق الأوسط",
     "Kingdom of Saudi Arabia",
   ],
-  authors: [{ name: "Saudi VC Intelligence" }],
+  authors: [{ name: "ذكاء رأس المال الجريء السعودي" }],
   openGraph: {
     type: "website",
-    locale: "en_US",
+    locale: "ar_SA",
     url: siteUrl,
-    title: "Saudi VC Intelligence Platform",
+    title: "منصة ذكاء رأس المال الجريء السعودي",
     description:
-      "AI-powered investment intelligence for the Saudi Arabian venture capital ecosystem. Rankings, reports, and risk insights across 10 sectors and 28+ companies.",
-    siteName: "Saudi VC Intelligence",
+      "ذكاء استثماري مدعوم بالذكاء الاصطناعي لمنظومة رأس المال الجريء السعودي. تصنيفات وتقارير ورؤى مخاطر عبر 10 قطاعات و28+ شركة.",
+    siteName: "ذكاء رأس المال الجريء السعودي",
     images: [
       {
         url: `${siteUrl}/og-image.svg`,
         width: 1200,
         height: 630,
-        alt: "Saudi VC Intelligence Platform — AI-powered investment analytics for Saudi Arabia",
+        alt: "منصة ذكاء رأس المال الجريء السعودي — تحليلات استثمارية مدعومة بالذكاء الاصطناعي",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Saudi VC Intelligence Platform",
+    title: "منصة ذكاء رأس المال الجريء السعودي",
     description:
-      "AI-powered investment intelligence for Saudi Arabian venture capital analysis.",
+      "ذكاء استثماري مدعوم بالذكاء الاصطناعي لتحليل رأس المال الجريء السعودي.",
     images: [`${siteUrl}/og-image.svg`],
   },
   robots: {
@@ -76,13 +76,21 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="dark">
+    <html lang="ar" dir="rtl" className="dark">
+      <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&family=Tajawal:wght@300;400;500;700&display=swap"
+          rel="stylesheet"
+        />
+      </head>
       <body className="antialiased min-h-screen bg-[#0a0a0f]">
         <SessionProvider>
           <JsonLd />
           <div className="flex h-screen overflow-hidden">
             <Sidebar />
-            <main className="flex-1 overflow-y-auto scroll-smooth md:ml-0">
+            <main className="flex-1 overflow-y-auto scroll-smooth">
               {children}
             </main>
           </div>

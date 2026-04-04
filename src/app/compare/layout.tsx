@@ -1,13 +1,13 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Compare — Side-by-Side VC Analysis",
+  title: "المقارنة — تحليل جنبًا إلى جنب لرأس المال الجريء",
   description:
-    "Compare Saudi Arabian companies and sectors side by side. Evaluate investability, risk, funding, and growth metrics to inform investment decisions.",
+    "قارن بين الشركات والقطاعات السعودية جنبًا إلى جنب. قيّم قابلية الاستثمار والمخاطر والتمويل ومؤشرات النمو لاتخاذ قرارات استثمارية مدروسة.",
   openGraph: {
-    title: "Compare — Side-by-Side VC Analysis",
+    title: "المقارنة — تحليل جنبًا إلى جنب لرأس المال الجريء",
     description:
-      "Compare Saudi Arabian companies and sectors side by side. Evaluate investability, risk, funding, and growth metrics to inform investment decisions.",
+      "قارن بين الشركات والقطاعات السعودية جنبًا إلى جنب.",
   },
 };
 

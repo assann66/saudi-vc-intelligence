@@ -23,18 +23,18 @@ import {
 import { GlobalSearch } from "./global-search";
 
 const navigation = [
-  { name: "Dashboard", href: "/", icon: LayoutDashboard },
-  { name: "Sectors", href: "/sectors", icon: PieChart },
-  { name: "Companies", href: "/companies", icon: Building2 },
+  { name: "لوحة التحكم", href: "/", icon: LayoutDashboard },
+  { name: "القطاعات", href: "/sectors", icon: PieChart },
+  { name: "الشركات", href: "/companies", icon: Building2 },
 ];
 
 const analyticsNav = [
-  { name: "AI Analytics", href: "/analytics", icon: Brain },
-  { name: "Rankings", href: "/rankings", icon: Trophy },
-  { name: "Reports", href: "/reports", icon: FileText },
-  { name: "Risk Insights", href: "/risk-insights", icon: Shield },
-  { name: "Compare", href: "/compare", icon: ArrowLeftRight },
-  { name: "Templates", href: "/templates", icon: FileImage },
+  { name: "تحليلات الذكاء الاصطناعي", href: "/analytics", icon: Brain },
+  { name: "التصنيفات", href: "/rankings", icon: Trophy },
+  { name: "التقارير", href: "/reports", icon: FileText },
+  { name: "رؤى المخاطر", href: "/risk-insights", icon: Shield },
+  { name: "المقارنة", href: "/compare", icon: ArrowLeftRight },
+  { name: "القوالب", href: "/templates", icon: FileImage },
 ];
 
 const adminNav = [
@@ -53,8 +53,8 @@ export function Sidebar() {
       {/* Mobile menu button */}
       <button
         onClick={() => setMobileOpen(true)}
-        className="fixed top-4 left-4 z-50 md:hidden p-2 rounded-lg bg-[#12121a] border border-[#1e1e2e] text-white"
-        aria-label="Open menu"
+        className="fixed top-4 right-4 z-50 md:hidden p-2 rounded-lg bg-[#12121a] border border-[#1e1e2e] text-white"
+        aria-label="فتح القائمة"
       >
         <Menu className="w-5 h-5" />
       </button>
@@ -69,26 +69,26 @@ export function Sidebar() {
 
       <aside
         className={cn(
-          "w-64 border-r border-[#1e1e2e] bg-[#0d0d14] flex flex-col shrink-0",
-          "fixed md:relative inset-y-0 left-0 z-50 transition-transform duration-300 md:translate-x-0",
-          mobileOpen ? "translate-x-0" : "-translate-x-full md:translate-x-0"
+          "w-64 border-l border-[#1e1e2e] bg-[#0d0d14] flex flex-col shrink-0",
+          "fixed md:relative inset-y-0 right-0 z-50 transition-transform duration-300 md:translate-x-0",
+          mobileOpen ? "translate-x-0" : "translate-x-full md:translate-x-0"
         )}
       >
       {/* Logo */}
       <div className="p-6 border-b border-[#1e1e2e] flex items-center justify-between">
         <div className="flex items-center gap-3">
-          <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-emerald-500 to-cyan-500 flex items-center justify-center animate-pulse-glow">
+          <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-[#2ECC71] to-[#1E3A5F] flex items-center justify-center animate-pulse-glow">
             <Zap className="w-5 h-5 text-white" />
           </div>
           <div>
-            <h1 className="text-sm font-bold text-white tracking-tight">Saudi VC</h1>
-            <p className="text-[10px] text-[#71717a] uppercase tracking-widest">Intelligence</p>
+            <h1 className="text-sm font-bold text-white tracking-tight font-heading">ذكاء رأس المال</h1>
+            <p className="text-[10px] text-[#71717a] tracking-widest">الجريء السعودي</p>
           </div>
         </div>
         <button
           onClick={() => setMobileOpen(false)}
           className="md:hidden text-[#71717a] hover:text-white transition-colors"
-          aria-label="Close menu"
+          aria-label="إغلاق القائمة"
         >
           <X className="w-5 h-5" />
         </button>
@@ -99,8 +99,8 @@ export function Sidebar() {
 
       {/* Navigation */}
       <nav className="flex-1 px-3 py-4 space-y-1">
-        <p className="px-3 mb-3 text-[10px] font-semibold uppercase tracking-widest text-[#71717a]">
-          Overview
+        <p className="px-3 mb-3 text-[10px] font-semibold tracking-widest text-[#71717a]">
+          نظرة عامة
         </p>
         {navigation.map((item) => {
           const isActive = pathname === item.href;
@@ -123,8 +123,8 @@ export function Sidebar() {
         })}
 
         <div className="pt-6">
-          <p className="px-3 mb-3 text-[10px] font-semibold uppercase tracking-widest text-[#71717a]">
-            Analytics
+          <p className="px-3 mb-3 text-[10px] font-semibold tracking-widest text-[#71717a]">
+            التحليلات
           </p>
           {analyticsNav.map((item) => {
             const isActive = pathname === item.href;
@@ -149,9 +149,9 @@ export function Sidebar() {
 
         {isAdmin && (
           <div className="pt-6">
-            <p className="px-3 mb-3 text-[10px] font-semibold uppercase tracking-widest text-[#71717a]">
-              <Settings className="w-3 h-3 inline-block ml-1" />
-              Admin
+            <p className="px-3 mb-3 text-[10px] font-semibold tracking-widest text-[#71717a]">
+              <Settings className="w-3 h-3 inline-block mr-1" />
+              الإدارة
             </p>
             {adminNav.map((item) => {
               const isActive = pathname === item.href;
@@ -179,9 +179,9 @@ export function Sidebar() {
       {/* Footer */}
       <div className="p-4 border-t border-[#1e1e2e]">
         <div className="glass rounded-lg p-3">
-          <p className="text-[10px] text-[#71717a] uppercase tracking-widest mb-1">Data Updated</p>
-          <p className="text-xs text-white font-medium">April 1, 2026</p>
-          <p className="text-[10px] text-emerald-400 mt-1">28 companies tracked</p>
+          <p className="text-[10px] text-[#71717a] tracking-widest mb-1">آخر تحديث للبيانات</p>
+          <p className="text-xs text-white font-medium">١ أبريل ٢٠٢٦</p>
+          <p className="text-[10px] text-emerald-400 mt-1">٢٨ شركة قيد المتابعة</p>
         </div>
       </div>
     </aside>

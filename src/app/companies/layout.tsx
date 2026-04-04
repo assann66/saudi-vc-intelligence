@@ -1,13 +1,13 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Companies — Saudi VC Portfolio Directory",
+  title: "الشركات — دليل محفظة رأ�� المال الجريء السعودي",
   description:
-    "Browse 28+ venture-backed companies across Saudi Arabia's startup ecosystem. Filter by sector, stage, and investability score.",
+    "تصفح أكثر من 28 شركة مدعومة برأس المال الجريء عبر منظومة الشركات الناشئة في المملكة العربية السعودية. تصفية حسب القطاع والمرحلة ومؤشر قابلية الاستثمار.",
   openGraph: {
-    title: "Companies — Saudi VC Portfolio Directory",
+    title: "الشركات — دليل محفظة رأس المال الجريء السعودي",
     description:
-      "Browse 28+ venture-backed companies across Saudi Arabia's startup ecosystem. Filter by sector, stage, and investability score.",
+      "تصفح أكثر من 28 شركة مدعومة برأس المال الجريء عبر منظومة الشركات الناشئة في المملكة العربية السعودية.",
   },
 };
 

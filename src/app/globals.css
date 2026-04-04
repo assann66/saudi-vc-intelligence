@@ -10,16 +10,25 @@
   --border: #1e1e2e;
   --muted: #18182a;
   --muted-foreground: #71717a;
-  --accent: #10b981;
+  --accent: #2ECC71;
   --accent-foreground: #e8e8ed;
+  --navy: #1E3A5F;
+  --green: #2ECC71;
+  --gold: #F39C12;
 }
 
 body {
   color: var(--foreground);
   background: var(--background);
-  font-family: 'Inter', system-ui, sans-serif;
+  font-family: 'Tajawal', system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  direction: rtl;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Cairo', system-ui, sans-serif;
+  font-weight: 700;
 }
 
 .glass {
@@ -35,14 +44,14 @@ body {
 }
 
 .gradient-text {
-  background: linear-gradient(135deg, #10b981 0%, #06b6d4 50%, #8b5cf6 100%);
+  background: linear-gradient(135deg, #2ECC71 0%, #1E3A5F 50%, #F39C12 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
 .glow-emerald {
-  box-shadow: 0 0 30px rgba(16, 185, 129, 0.1);
+  box-shadow: 0 0 30px rgba(46, 204, 113, 0.1);
 }
 
 ::-webkit-scrollbar {
@@ -68,13 +77,13 @@ body {
   to { opacity: 1; transform: translateY(0); }
 }
 
-@keyframes slideInLeft {
-  from { opacity: 0; transform: translateX(-16px); }
+@keyframes slideInRight {
+  from { opacity: 0; transform: translateX(16px); }
   to { opacity: 1; transform: translateX(0); }
 }
 
-@keyframes slideInRight {
-  from { opacity: 0; transform: translateX(16px); }
+@keyframes slideInLeft {
+  from { opacity: 0; transform: translateX(-16px); }
   to { opacity: 1; transform: translateX(0); }
 }
 
@@ -89,8 +98,8 @@ body {
 }
 
 @keyframes pulse-glow {
-  0%, 100% { box-shadow: 0 0 20px rgba(16, 185, 129, 0.1); }
-  50% { box-shadow: 0 0 40px rgba(16, 185, 129, 0.2); }
+  0%, 100% { box-shadow: 0 0 20px rgba(46, 204, 113, 0.1); }
+  50% { box-shadow: 0 0 40px rgba(46, 204, 113, 0.2); }
 }
 
 .animate-fade-in {
@@ -125,16 +134,16 @@ main > * {
   animation: fadeIn 0.3s ease-out;
 }
 
-/* Responsive sidebar */
+/* Responsive sidebar - RTL */
 @media (max-width: 768px) {
   aside {
     position: fixed;
-    left: -100%;
+    right: -100%;
     z-index: 50;
-    transition: left 0.3s ease;
+    transition: right 0.3s ease;
   }
   aside.open {
-    left: 0;
+    right: 0;
   }
 }
 
@@ -155,7 +164,7 @@ main > * {
     border: 1px solid #e5e7eb !important;
     backdrop-filter: none !important;
   }
-  .print\\:hidden {
+  .print\:hidden {
     display: none !important;
   }
 }

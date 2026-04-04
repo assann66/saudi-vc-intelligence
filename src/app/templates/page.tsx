@@ -56,8 +56,8 @@ export default function TemplatesPage() {
             <FileImage className="w-5 h-5 text-white" />
           </div>
           <div>
-            <h1 className="text-2xl font-bold text-white">نظام القوالب</h1>
-            <p className="text-sm text-[#71717a]">Template System — {templates?.length || 0} templates</p>
+            <h1 className="text-2xl font-bold text-white font-heading">نظام القوالب</h1>
+            <p className="text-sm text-[#71717a]">نظام القوالب — {templates?.length || 0} قالب</p>
           </div>
         </div>
         {!hasTemplates && (

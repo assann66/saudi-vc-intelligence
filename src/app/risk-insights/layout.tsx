@@ -1,13 +1,13 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Risk Insights — Saudi VC Risk Analysis",
+  title: "رؤى المخاطر — تحليل مخاطر رأس المال الجريء السعودي",
   description:
-    "Comprehensive risk analysis dashboard for Saudi Arabian venture capital. Evaluate regulatory, market, operational, and financial risks across sectors and companies.",
+    "لوحة تحليل مخاطر شاملة لرأس المال الجريء في المملكة العربية السعودية. تقييم المخاطر التنظيمية والسوقية والتشغيلية والمالية عبر القطاعات والشركات.",
   openGraph: {
-    title: "Risk Insights — Saudi VC Risk Analysis",
+    title: "رؤى المخاطر — تحليل مخاطر رأس المال الجريء السعودي",
     description:
-      "Comprehensive risk analysis dashboard for Saudi Arabian venture capital. Evaluate regulatory, market, operational, and financial risks across sectors and companies.",
+      "لوحة تحليل مخاطر شاملة لرأس المال الجريء في المملكة العربية السعودية.",
   },
 };
 

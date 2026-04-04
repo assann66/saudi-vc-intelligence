@@ -160,12 +160,12 @@ export default function RankingsView({ companies, sectors }: { companies: Compan
         <div className="space-y-1">
           <div className="flex items-center gap-3">
             <Trophy className="w-6 h-6 text-amber-400" />
-            <h1 className="text-2xl font-bold text-white tracking-tight">
-              Opportunity Rankings
+            <h1 className="text-2xl font-bold font-heading text-white tracking-tight">
+              تصنيف الفرص
             </h1>
           </div>
           <p className="text-sm text-[#71717a]">
-            Rank and filter sectors and companies by any KPI dimension
+            ترتيب وتصفية القطاعات والشركات حسب أي بُعد من مؤشرات الأداء
           </p>
         </div>
 
@@ -179,7 +179,7 @@ export default function RankingsView({ companies, sectors }: { companies: Compan
                 : "text-[#71717a] hover:text-white"
             )}
           >
-            <Building2 className="w-3.5 h-3.5" /> Companies
+            <Building2 className="w-3.5 h-3.5" /> الشركات
           </button>
           <button
             onClick={() => { setViewMode("sectors"); setSortAsc(false); }}
@@ -190,7 +190,7 @@ export default function RankingsView({ companies, sectors }: { companies: Compan
                 : "text-[#71717a] hover:text-white"
             )}
           >
-            <PieChart className="w-3.5 h-3.5" /> Sectors
+            <PieChart className="w-3.5 h-3.5" /> القطاعات
           </button>
         </div>
       </div>
@@ -198,13 +198,13 @@ export default function RankingsView({ companies, sectors }: { companies: Compan
       {/* Filters */}
       <div className="flex flex-wrap gap-3 items-center">
         <div className="relative flex-1 min-w-[240px] max-w-md">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#71717a]" />
+          <Search className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#71717a]" />
           <input
             type="text"
-            placeholder={viewMode === "companies" ? "Search companies..." : "Search sectors..."}
+            placeholder={viewMode === "companies" ? "البحث في الشركات..." : "البحث في القطاعات..."}
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="w-full pl-10 pr-4 py-2.5 bg-[#12121a] border border-[#1e1e2e] rounded-lg text-sm text-white placeholder:text-[#71717a] focus:outline-none focus:border-emerald-500/50 transition-colors"
+            className="w-full pr-10 pl-4 py-2.5 bg-[#12121a] border border-[#1e1e2e] rounded-lg text-sm text-white placeholder:text-[#71717a] focus:outline-none focus:border-emerald-500/50 transition-colors"
           />
         </div>
 
@@ -215,7 +215,7 @@ export default function RankingsView({ companies, sectors }: { companies: Compan
               onChange={(e) => setSectorFilter(e.target.value)}
               className="px-4 py-2.5 bg-[#12121a] border border-[#1e1e2e] rounded-lg text-sm text-white focus:outline-none focus:border-emerald-500/50 transition-colors"
             >
-              <option value="all">All Sectors</option>
+              <option value="all">جميع القطاعات</option>
               {sectors.map((s) => (
                 <option key={s.id} value={s.id}>{s.name}</option>
               ))}
@@ -226,7 +226,7 @@ export default function RankingsView({ companies, sectors }: { companies: Compan
               onChange={(e) => setStageFilter(e.target.value)}
               className="px-4 py-2.5 bg-[#12121a] border border-[#1e1e2e] rounded-lg text-sm text-white focus:outline-none focus:border-emerald-500/50 transition-colors"
             >
-              <option value="all">All Stages</option>
+              <option value="all">جميع المراحل</option>
               {stages.map((s) => (
                 <option key={s} value={s}>{s}</option>
               ))}
@@ -236,7 +236,7 @@ export default function RankingsView({ companies, sectors }: { companies: Compan
 
         <div className="flex items-center gap-2">
           <Filter className="w-3.5 h-3.5 text-[#71717a]" />
-          <span className="text-xs text-[#71717a]">Min Score:</span>
+          <span className="text-xs text-[#71717a]">الحد الأدنى:</span>
           <input
             type="range"
             min={0}
@@ -250,7 +250,7 @@ export default function RankingsView({ companies, sectors }: { companies: Compan
         </div>
 
         <div className="text-xs text-[#71717a] ml-auto">
-          {viewMode === "companies" ? filteredCompanies.length : filteredSectors.length} results
+          {viewMode === "companies" ? filteredCompanies.length : filteredSectors.length} نتيجة
         </div>
       </div>
 
@@ -265,20 +265,20 @@ export default function RankingsView({ companies, sectors }: { companies: Compan
                     #
                   </th>
                   <th className="px-4 py-3 text-left text-[10px] font-semibold uppercase tracking-widest text-[#71717a]">
-                    Company
+                    الشركة
                   </th>
                   <th className="px-4 py-3 text-left text-[10px] font-semibold uppercase tracking-widest text-[#71717a]">
-                    Sector
+                    القطاع
                   </th>
                   {[
-                    { key: "investability" as CompanySortKey, label: "Investability" },
-                    { key: "riskScore" as CompanySortKey, label: "Risk" },
-                    { key: "growthRate" as CompanySortKey, label: "Growth" },
-                    { key: "totalFunding" as CompanySortKey, label: "Funding" },
-                    { key: "fundingMomentum" as CompanySortKey, label: "Momentum" },
-                    { key: "saudiRelevance" as CompanySortKey, label: "Saudi Rel." },
-                    { key: "marketGap" as CompanySortKey, label: "Mkt Gap" },
-                    { key: "recommendation" as CompanySortKey, label: "Signal" },
+                    { key: "investability" as CompanySortKey, label: "الاستثمار" },
+                    { key: "riskScore" as CompanySortKey, label: "المخاطر" },
+                    { key: "growthRate" as CompanySortKey, label: "النمو" },
+                    { key: "totalFunding" as CompanySortKey, label: "التمويل" },
+                    { key: "fundingMomentum" as CompanySortKey, label: "الزخم" },
+                    { key: "saudiRelevance" as CompanySortKey, label: "الملاءمة" },
+                    { key: "marketGap" as CompanySortKey, label: "الفجوة" },
+                    { key: "recommendation" as CompanySortKey, label: "الإشارة" },
                   ].map(({ key, label }) => (
                     <th
                       key={key}
@@ -396,17 +396,17 @@ export default function RankingsView({ companies, sectors }: { companies: Compan
                     #
                   </th>
                   <th className="px-4 py-3 text-left text-[10px] font-semibold uppercase tracking-widest text-[#71717a]">
-                    Sector
+                    القطاع
                   </th>
                   {[
-                    { key: "attractiveness" as SectorSortKey, label: "Attractiveness" },
-                    { key: "riskScore" as SectorSortKey, label: "Risk" },
-                    { key: "marketGap" as SectorSortKey, label: "Market Gap" },
-                    { key: "fundingMomentum" as SectorSortKey, label: "Momentum" },
-                    { key: "competitionIntensity" as SectorSortKey, label: "Competition" },
-                    { key: "saudiRelevance" as SectorSortKey, label: "Saudi Rel." },
-                    { key: "totalFunding" as SectorSortKey, label: "Total Funding" },
-                    { key: "yoyGrowth" as SectorSortKey, label: "YoY Growth" },
+                    { key: "attractiveness" as SectorSortKey, label: "الجاذبية" },
+                    { key: "riskScore" as SectorSortKey, label: "المخاطر" },
+                    { key: "marketGap" as SectorSortKey, label: "الفجوة السوقية" },
+                    { key: "fundingMomentum" as SectorSortKey, label: "الزخم" },
+                    { key: "competitionIntensity" as SectorSortKey, label: "المنافسة" },
+                    { key: "saudiRelevance" as SectorSortKey, label: "الملاءمة" },
+                    { key: "totalFunding" as SectorSortKey, label: "إجمالي التمويل" },
+                    { key: "yoyGrowth" as SectorSortKey, label: "النمو السنوي" },
                   ].map(({ key, label }) => (
                     <th
                       key={key}
@@ -444,7 +444,7 @@ export default function RankingsView({ companies, sectors }: { companies: Compan
                     <td className="px-4 py-3.5">
                       <p className="text-sm font-medium text-white">{sector.name}</p>
                       <p className="text-[10px] text-[#71717a] mt-0.5">
-                        {sector.arabicName} &middot; {companyCount} companies
+                        {sector.arabicName} &middot; {companyCount} شركة
                       </p>
                     </td>
                     <td className="px-4 py-3.5 text-right">

@@ -18,7 +18,7 @@ import {
 import type { Sector } from "@/data/sectors";
 import { useState, useMemo } from "react";
 
-const COLORS = ["#10b981", "#06b6d4", "#8b5cf6", "#f59e0b", "#f43f5e"];
+const COLORS = ["#2ECC71", "#1E3A5F", "#F39C12", "#06b6d4", "#f43f5e"];
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const CustomTooltip = ({ active, payload, label }: any) => {
@@ -47,7 +47,7 @@ export function SectorChart({ sectors }: { sectors: Sector[] }) {
   const barData = useMemo(() => [...sectors]
     .sort((a, b) => b.attractiveness - a.attractiveness)
     .map((s) => ({
-      name: s.name,
+      name: s.arabicName || s.name,
       attractiveness: s.attractiveness,
       saudiRelevance: s.saudiRelevance,
       fundingMomentum: s.fundingMomentum,
@@ -57,31 +57,38 @@ export function SectorChart({ sectors }: { sectors: Sector[] }) {
     .sort((a, b) => b.attractiveness - a.attractiveness)
     .slice(0, 5), [sectors]);
 
-  const radarData = useMemo(() => [
-    "attractiveness",
-    "saudiRelevance",
-    "fundingMomentum",
-    "marketGap",
-    "competitionIntensity",
-  ].map((key) => {
-    const point: Record<string, string | number> = {
-      metric: key
-        .replace(/([A-Z])/g, " $1")
-        .replace(/^./, (s) => s.toUpperCase()),
+  const radarData = useMemo(() => {
+    const metricLabels: Record<string, string> = {
+      attractiveness: "الجاذبية",
+      saudiRelevance: "الملاءمة السعودية",
+      fundingMomentum: "زخم التمويل",
+      marketGap: "الفجوة السوقية",
+      competitionIntensity: "شدة المنافسة",
     };
-    topSectors.forEach((s) => {
-      point[s.name] = s[key as keyof typeof s] as number;
+    return [
+      "attractiveness",
+      "saudiRelevance",
+      "fundingMomentum",
+      "marketGap",
+      "competitionIntensity",
+    ].map((key) => {
+      const point: Record<string, string | number> = {
+        metric: metricLabels[key] || key,
+      };
+      topSectors.forEach((s) => {
+        point[s.arabicName || s.name] = s[key as keyof typeof s] as number;
+      });
+      return point;
     });
-    return point;
-  }), [topSectors]);
+  }, [topSectors]);
 
   return (
     <div className="glass rounded-xl p-6 animate-fade-in" style={{ animationDelay: "400ms" }}>
       <div className="flex items-center justify-between mb-6">
         <div>
-          <h3 className="text-sm font-semibold text-white">Sector Analysis</h3>
+          <h3 className="text-sm font-semibold text-white font-heading">تحليل القطاعات</h3>
           <p className="text-xs text-[#71717a] mt-1">
-            Comparative sector performance metrics
+            مقارنة مؤشرات أداء القطاعات
           </p>
         </div>
         <div className="flex gap-1 bg-[#0a0a0f] rounded-lg p-0.5">
@@ -93,7 +100,7 @@ export function SectorChart({ sectors }: { sectors: Sector[] }) {
                 : "text-[#71717a] hover:text-white"
             }`}
           >
-            Bar
+            أعمدة
           </button>
           <button
             onClick={() => setView("radar")}
@@ -103,7 +110,7 @@ export function SectorChart({ sectors }: { sectors: Sector[] }) {
                 : "text-[#71717a] hover:text-white"
             }`}
           >
-            Radar
+            رادار
           </button>
         </div>
       </div>
@@ -129,9 +136,9 @@ export function SectorChart({ sectors }: { sectors: Sector[] }) {
                 domain={[0, 100]}
               />
               <Tooltip content={<CustomTooltip />} />
-              <Bar dataKey="attractiveness" fill="#10b981" radius={[4, 4, 0, 0]} name="Attractiveness" />
-              <Bar dataKey="saudiRelevance" fill="#06b6d4" radius={[4, 4, 0, 0]} name="Saudi Relevance" />
-              <Bar dataKey="fundingMomentum" fill="#8b5cf6" radius={[4, 4, 0, 0]} name="Funding Momentum" />
+              <Bar dataKey="attractiveness" fill="#2ECC71" radius={[4, 4, 0, 0]} name="الجاذبية" />
+              <Bar dataKey="saudiRelevance" fill="#1E3A5F" radius={[4, 4, 0, 0]} name="الملاءمة السعودية" />
+              <Bar dataKey="fundingMomentum" fill="#F39C12" radius={[4, 4, 0, 0]} name="زخم التمويل" />
             </BarChart>
           </ResponsiveContainer>
         ) : (
@@ -151,8 +158,8 @@ export function SectorChart({ sectors }: { sectors: Sector[] }) {
               {topSectors.map((s, i) => (
                 <Radar
                   key={s.id}
-                  name={s.name}
-                  dataKey={s.name}
+                  name={s.arabicName || s.name}
+                  dataKey={s.arabicName || s.name}
                   stroke={COLORS[i]}
                   fill={COLORS[i]}
                   fillOpacity={0.1}

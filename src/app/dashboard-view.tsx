@@ -36,27 +36,27 @@ export default function DashboardView({ sectors, companies }: { sectors: Sector[
       {/* Header */}
       <div className="space-y-1">
         <div className="flex items-center gap-3">
-          <h1 className="text-2xl font-bold text-white tracking-tight">
-            Executive Dashboard
+          <h1 className="text-2xl font-bold text-white tracking-tight font-heading">
+            لوحة التحكم التنفيذية
           </h1>
-          <span className="px-2.5 py-1 text-[10px] font-semibold uppercase tracking-widest bg-emerald-500/10 text-emerald-400 rounded-full border border-emerald-500/20">
-            Live
+          <span className="px-2.5 py-1 text-[10px] font-semibold tracking-widest bg-emerald-500/10 text-emerald-400 rounded-full border border-emerald-500/20">
+            مباشر
           </span>
         </div>
         <p className="text-sm text-[#71717a]">
-          Saudi VC ecosystem intelligence &mdash; {sectors.length} sectors, {companies.length} companies, {formatCurrency(totalFunding)} total funding tracked
+          ذكاء منظومة رأس المال الجريء السعودي &mdash; {sectors.length} قطاعات، {companies.length} شركة، {formatCurrency(totalFunding)} إجمالي التمويل المتابع
         </p>
       </div>
 
       {/* KPI Cards Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-7 gap-4">
-        <KpiCard title="Sector Attractiveness" value={avgAttractiveness} subtitle="Avg. across sectors" change={8} icon={Target} color="emerald" delay={0} />
-        <KpiCard title="Investability" value={avgInvestability} subtitle="Company avg." change={12} icon={TrendingUp} color="cyan" delay={50} />
-        <KpiCard title="Risk Score" value={avgRisk} subtitle="Lower is better" change={-5} icon={Shield} color="rose" delay={100} />
-        <KpiCard title="Market Gap" value={avgMarketGap} subtitle="Opportunity index" change={15} icon={Crosshair} color="violet" delay={150} />
-        <KpiCard title="Funding Momentum" value={avgFundingMomentum} subtitle="Capital velocity" change={22} icon={Zap} color="amber" delay={200} />
-        <KpiCard title="Competition" value={avgCompetition} subtitle="Market density" change={3} icon={Swords} color="blue" delay={250} />
-        <KpiCard title="Saudi Relevance" value={avgSaudiRelevance} subtitle="Vision 2030 align." change={6} icon={Landmark} color="indigo" delay={300} />
+        <KpiCard title="جاذبية القطاع" value={avgAttractiveness} subtitle="المتوسط عبر القطاعات" change={8} icon={Target} color="emerald" delay={0} />
+        <KpiCard title="قابلية الاستثمار" value={avgInvestability} subtitle="متوسط الشركات" change={12} icon={TrendingUp} color="cyan" delay={50} />
+        <KpiCard title="مؤشر المخاطر" value={avgRisk} subtitle="الأقل أفضل" change={-5} icon={Shield} color="rose" delay={100} />
+        <KpiCard title="الفجوة السوقية" value={avgMarketGap} subtitle="مؤشر الفرص" change={15} icon={Crosshair} color="violet" delay={150} />
+        <KpiCard title="زخم التمويل" value={avgFundingMomentum} subtitle="سرعة رأس المال" change={22} icon={Zap} color="amber" delay={200} />
+        <KpiCard title="المنافسة" value={avgCompetition} subtitle="كثافة السوق" change={3} icon={Swords} color="blue" delay={250} />
+        <KpiCard title="الملاءمة السعودية" value={avgSaudiRelevance} subtitle="توافق رؤية 2030" change={6} icon={Landmark} color="indigo" delay={300} />
       </div>
 
       {/* Charts Row */}

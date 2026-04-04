@@ -19,10 +19,20 @@ const config: Config = {
         "muted-foreground": "var(--muted-foreground)",
         accent: "var(--accent)",
         "accent-foreground": "var(--accent-foreground)",
+        navy: {
+          DEFAULT: "#1E3A5F",
+          light: "#2A4F7F",
+          dark: "#152B47",
+        },
         emerald: {
-          400: "#34d399",
-          500: "#10b981",
-          600: "#059669",
+          400: "#2ECC71",
+          500: "#27AE60",
+          600: "#1E8449",
+        },
+        gold: {
+          400: "#F5B041",
+          500: "#F39C12",
+          600: "#D68910",
         },
         cyan: {
           400: "#22d3ee",
@@ -33,8 +43,8 @@ const config: Config = {
           500: "#8b5cf6",
         },
         amber: {
-          400: "#fbbf24",
-          500: "#f59e0b",
+          400: "#F5B041",
+          500: "#F39C12",
         },
         rose: {
           400: "#fb7185",
@@ -45,7 +55,8 @@ const config: Config = {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
       },
       fontFamily: {
-        sans: ["Inter", "system-ui", "sans-serif"],
+        sans: ["Tajawal", "system-ui", "sans-serif"],
+        heading: ["Cairo", "system-ui", "sans-serif"],
       },
     },
   },

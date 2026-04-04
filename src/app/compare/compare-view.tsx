@@ -61,24 +61,24 @@ export default function CompareView({ companies, sectors }: { companies: Company
   const companyRadarData = useMemo(() => {
     if (selectedCompanies.length === 0) return [];
     return [
-      { metric: "Investability", ...Object.fromEntries(selectedCompanies.map((c) => [c.company.id, c.company.investability])) },
-      { metric: "Low Risk", ...Object.fromEntries(selectedCompanies.map((c) => [c.company.id, 100 - c.company.riskScore])) },
-      { metric: "Growth", ...Object.fromEntries(selectedCompanies.map((c) => [c.company.id, Math.min(100, c.company.growthRate)])) },
-      { metric: "Market Gap", ...Object.fromEntries(selectedCompanies.map((c) => [c.company.id, c.analysis.marketGap.score])) },
-      { metric: "Momentum", ...Object.fromEntries(selectedCompanies.map((c) => [c.company.id, c.analysis.fundingMomentum.score])) },
-      { metric: "Saudi Rel.", ...Object.fromEntries(selectedCompanies.map((c) => [c.company.id, c.analysis.saudiRelevance.score])) },
+      { metric: "الاستثمار", ...Object.fromEntries(selectedCompanies.map((c) => [c.company.id, c.company.investability])) },
+      { metric: "انخفاض المخاطر", ...Object.fromEntries(selectedCompanies.map((c) => [c.company.id, 100 - c.company.riskScore])) },
+      { metric: "النمو", ...Object.fromEntries(selectedCompanies.map((c) => [c.company.id, Math.min(100, c.company.growthRate)])) },
+      { metric: "الفجوة السوقية", ...Object.fromEntries(selectedCompanies.map((c) => [c.company.id, c.analysis.marketGap.score])) },
+      { metric: "الزخم", ...Object.fromEntries(selectedCompanies.map((c) => [c.company.id, c.analysis.fundingMomentum.score])) },
+      { metric: "الملاءمة السعودية", ...Object.fromEntries(selectedCompanies.map((c) => [c.company.id, c.analysis.saudiRelevance.score])) },
     ];
   }, [selectedCompanies]);
 
   const sectorRadarData = useMemo(() => {
     if (selectedSectors.length === 0) return [];
     return [
-      { metric: "Attractiveness", ...Object.fromEntries(selectedSectors.map((s) => [s.sector.id, s.sector.attractiveness])) },
-      { metric: "Low Risk", ...Object.fromEntries(selectedSectors.map((s) => [s.sector.id, 100 - s.sector.riskScore])) },
-      { metric: "Market Gap", ...Object.fromEntries(selectedSectors.map((s) => [s.sector.id, s.sector.marketGap])) },
-      { metric: "Momentum", ...Object.fromEntries(selectedSectors.map((s) => [s.sector.id, s.sector.fundingMomentum])) },
-      { metric: "Low Competition", ...Object.fromEntries(selectedSectors.map((s) => [s.sector.id, 100 - s.sector.competitionIntensity])) },
-      { metric: "Saudi Rel.", ...Object.fromEntries(selectedSectors.map((s) => [s.sector.id, s.sector.saudiRelevance])) },
+      { metric: "الجاذبية", ...Object.fromEntries(selectedSectors.map((s) => [s.sector.id, s.sector.attractiveness])) },
+      { metric: "انخفاض المخاطر", ...Object.fromEntries(selectedSectors.map((s) => [s.sector.id, 100 - s.sector.riskScore])) },
+      { metric: "الفجوة السوقية", ...Object.fromEntries(selectedSectors.map((s) => [s.sector.id, s.sector.marketGap])) },
+      { metric: "الزخم", ...Object.fromEntries(selectedSectors.map((s) => [s.sector.id, s.sector.fundingMomentum])) },
+      { metric: "انخفاض المنافسة", ...Object.fromEntries(selectedSectors.map((s) => [s.sector.id, 100 - s.sector.competitionIntensity])) },
+      { metric: "الملاءمة السعودية", ...Object.fromEntries(selectedSectors.map((s) => [s.sector.id, s.sector.saudiRelevance])) },
     ];
   }, [selectedSectors]);
 
@@ -127,10 +127,10 @@ export default function CompareView({ companies, sectors }: { companies: Company
         <div className="space-y-1">
           <div className="flex items-center gap-3">
             <ArrowLeftRight className="w-6 h-6 text-cyan-400" />
-            <h1 className="text-2xl font-bold text-white tracking-tight">Comparison</h1>
+            <h1 className="text-2xl font-bold font-heading text-white tracking-tight">المقارنة</h1>
           </div>
           <p className="text-sm text-[#71717a]">
-            Side-by-side sector or company comparison across all KPI dimensions
+            مقارنة جنبًا إلى جنب بين القطاعات أو الشركات عبر جميع أبعاد مؤشرات الأداء
           </p>
         </div>
 
@@ -144,7 +144,7 @@ export default function CompareView({ companies, sectors }: { companies: Company
                 : "text-[#71717a] hover:text-white"
             )}
           >
-            <Building2 className="w-3.5 h-3.5" /> Companies
+            <Building2 className="w-3.5 h-3.5" /> الشركات
           </button>
           <button
             onClick={() => setMode("sectors")}
@@ -155,7 +155,7 @@ export default function CompareView({ companies, sectors }: { companies: Company
                 : "text-[#71717a] hover:text-white"
             )}
           >
-            <PieChart className="w-3.5 h-3.5" /> Sectors
+            <PieChart className="w-3.5 h-3.5" /> القطاعات
           </button>
         </div>
       </div>
@@ -163,7 +163,7 @@ export default function CompareView({ companies, sectors }: { companies: Company
       {/* Selection */}
       <div className="glass rounded-xl p-5">
         <div className="flex items-center gap-3 flex-wrap">
-          <span className="text-xs text-[#71717a] uppercase tracking-widest">Comparing:</span>
+          <span className="text-xs text-[#71717a] uppercase tracking-widest">المقارنة بين:</span>
 
           {mode === "companies" ? (
             <>
@@ -189,7 +189,7 @@ export default function CompareView({ companies, sectors }: { companies: Company
                     onClick={() => setShowCompanyDropdown(!showCompanyDropdown)}
                     className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-dashed border-[#1e1e2e] text-sm text-[#71717a] hover:text-white hover:border-[#3e3e4e] transition-colors"
                   >
-                    <Plus className="w-3.5 h-3.5" /> Add Company
+                    <Plus className="w-3.5 h-3.5" /> إضافة شركة
                   </button>
                   {showCompanyDropdown && (
                     <div className="absolute z-50 top-full mt-1 left-0 w-64 max-h-64 overflow-y-auto bg-[#12121a] border border-[#1e1e2e] rounded-lg shadow-xl">
@@ -236,7 +236,7 @@ export default function CompareView({ companies, sectors }: { companies: Company
                     onClick={() => setShowSectorDropdown(!showSectorDropdown)}
                     className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-dashed border-[#1e1e2e] text-sm text-[#71717a] hover:text-white hover:border-[#3e3e4e] transition-colors"
                   >
-                    <Plus className="w-3.5 h-3.5" /> Add Sector
+                    <Plus className="w-3.5 h-3.5" /> إضافة قطاع
                   </button>
                   {showSectorDropdown && (
                     <div className="absolute z-50 top-full mt-1 left-0 w-64 max-h-64 overflow-y-auto bg-[#12121a] border border-[#1e1e2e] rounded-lg shadow-xl">
@@ -264,7 +264,7 @@ export default function CompareView({ companies, sectors }: { companies: Company
       {((mode === "companies" && selectedCompanies.length >= 2) ||
         (mode === "sectors" && selectedSectors.length >= 2)) && (
         <div className="glass rounded-xl p-6">
-          <h3 className="text-sm font-semibold text-white mb-4">KPI Radar Comparison</h3>
+          <h3 className="text-sm font-semibold font-heading text-white mb-4">مقارنة مؤشرات الأداء بالرادار</h3>
           <div className="h-[400px]">
             <ResponsiveContainer width="100%" height="100%">
               <RadarChart
@@ -320,14 +320,14 @@ export default function CompareView({ companies, sectors }: { companies: Company
       {mode === "companies" && selectedCompanies.length >= 2 && (
         <div className="glass rounded-xl overflow-hidden">
           <div className="px-6 py-4 border-b border-[#1e1e2e]">
-            <h3 className="text-sm font-semibold text-white">Detailed Comparison</h3>
+            <h3 className="text-sm font-semibold font-heading text-white">مقارنة تفصيلية</h3>
           </div>
           <div className="overflow-x-auto">
             <table className="w-full">
               <thead>
                 <tr className="border-b border-[#1e1e2e]">
                   <th className="px-6 py-3 text-left text-[10px] font-semibold uppercase tracking-widest text-[#71717a]">
-                    Metric
+                    المؤشر
                   </th>
                   {selectedCompanies.map(({ company }, i) => (
                     <th
@@ -342,21 +342,21 @@ export default function CompareView({ companies, sectors }: { companies: Company
               </thead>
               <tbody>
                 {[
-                  { label: "Sector", getValue: (c: typeof selectedCompanies[0]) => c.sector.name, isText: true },
-                  { label: "Stage", getValue: (c: typeof selectedCompanies[0]) => c.company.stage, isText: true },
-                  { label: "HQ", getValue: (c: typeof selectedCompanies[0]) => c.company.hqCity, isText: true },
-                  { label: "Founded", getValue: (c: typeof selectedCompanies[0]) => String(c.company.foundedYear), isText: true },
-                  { label: "Total Funding", getValue: (c: typeof selectedCompanies[0]) => formatCurrency(c.company.totalFunding), isText: true },
-                  { label: "Last Round", getValue: (c: typeof selectedCompanies[0]) => formatCurrency(c.company.lastRoundSize), isText: true },
-                  { label: "Employees", getValue: (c: typeof selectedCompanies[0]) => String(c.company.employees), isText: true },
-                  { label: "Investability", getValue: (c: typeof selectedCompanies[0]) => c.company.investability, isScore: true },
-                  { label: "Risk Score", getValue: (c: typeof selectedCompanies[0]) => c.company.riskScore, isScore: true, inverse: true },
-                  { label: "Growth Rate", getValue: (c: typeof selectedCompanies[0]) => c.company.growthRate, isScore: true, suffix: "%" },
-                  { label: "Funding Momentum", getValue: (c: typeof selectedCompanies[0]) => c.analysis.fundingMomentum.score, isScore: true },
-                  { label: "Market Gap", getValue: (c: typeof selectedCompanies[0]) => c.analysis.marketGap.score, isScore: true },
-                  { label: "Saudi Relevance", getValue: (c: typeof selectedCompanies[0]) => c.analysis.saudiRelevance.score, isScore: true },
-                  { label: "Competition", getValue: (c: typeof selectedCompanies[0]) => c.analysis.competitionIntensity.score, isScore: true, inverse: true },
-                  { label: "Recommendation", getValue: (c: typeof selectedCompanies[0]) => c.analysis.recommendation, isRec: true },
+                  { label: "القطاع", getValue: (c: typeof selectedCompanies[0]) => c.sector.name, isText: true },
+                  { label: "المرحلة", getValue: (c: typeof selectedCompanies[0]) => c.company.stage, isText: true },
+                  { label: "المقر", getValue: (c: typeof selectedCompanies[0]) => c.company.hqCity, isText: true },
+                  { label: "سنة التأسيس", getValue: (c: typeof selectedCompanies[0]) => String(c.company.foundedYear), isText: true },
+                  { label: "إجمالي التمويل", getValue: (c: typeof selectedCompanies[0]) => formatCurrency(c.company.totalFunding), isText: true },
+                  { label: "آخر جولة", getValue: (c: typeof selectedCompanies[0]) => formatCurrency(c.company.lastRoundSize), isText: true },
+                  { label: "الموظفون", getValue: (c: typeof selectedCompanies[0]) => String(c.company.employees), isText: true },
+                  { label: "قابلية الاستثمار", getValue: (c: typeof selectedCompanies[0]) => c.company.investability, isScore: true },
+                  { label: "مؤشر المخاطر", getValue: (c: typeof selectedCompanies[0]) => c.company.riskScore, isScore: true, inverse: true },
+                  { label: "معدل النمو", getValue: (c: typeof selectedCompanies[0]) => c.company.growthRate, isScore: true, suffix: "%" },
+                  { label: "زخم التمويل", getValue: (c: typeof selectedCompanies[0]) => c.analysis.fundingMomentum.score, isScore: true },
+                  { label: "الفجوة السوقية", getValue: (c: typeof selectedCompanies[0]) => c.analysis.marketGap.score, isScore: true },
+                  { label: "الملاءمة السعودية", getValue: (c: typeof selectedCompanies[0]) => c.analysis.saudiRelevance.score, isScore: true },
+                  { label: "المنافسة", getValue: (c: typeof selectedCompanies[0]) => c.analysis.competitionIntensity.score, isScore: true, inverse: true },
+                  { label: "التوصية", getValue: (c: typeof selectedCompanies[0]) => c.analysis.recommendation, isRec: true },
                 ].map(({ label, getValue, isText, isScore, isRec, inverse, suffix }) => (
                   <tr key={label} className="border-b border-[#1e1e2e]/50">
                     <td className="px-6 py-3 text-sm text-[#a1a1aa]">{label}</td>
@@ -393,14 +393,14 @@ export default function CompareView({ companies, sectors }: { companies: Company
       {mode === "sectors" && selectedSectors.length >= 2 && (
         <div className="glass rounded-xl overflow-hidden">
           <div className="px-6 py-4 border-b border-[#1e1e2e]">
-            <h3 className="text-sm font-semibold text-white">Detailed Comparison</h3>
+            <h3 className="text-sm font-semibold font-heading text-white">مقارنة تفصيلية</h3>
           </div>
           <div className="overflow-x-auto">
             <table className="w-full">
               <thead>
                 <tr className="border-b border-[#1e1e2e]">
                   <th className="px-6 py-3 text-left text-[10px] font-semibold uppercase tracking-widest text-[#71717a]">
-                    Metric
+                    المؤشر
                   </th>
                   {selectedSectors.map(({ sector }, i) => (
                     <th
@@ -415,17 +415,17 @@ export default function CompareView({ companies, sectors }: { companies: Company
               </thead>
               <tbody>
                 {[
-                  { label: "Attractiveness", getVal: (s: typeof selectedSectors[0]) => s.sector.attractiveness, isScore: true },
-                  { label: "Risk Score", getVal: (s: typeof selectedSectors[0]) => s.sector.riskScore, isScore: true, inverse: true },
-                  { label: "Market Gap", getVal: (s: typeof selectedSectors[0]) => s.sector.marketGap, isScore: true },
-                  { label: "Funding Momentum", getVal: (s: typeof selectedSectors[0]) => s.sector.fundingMomentum, isScore: true },
-                  { label: "Competition", getVal: (s: typeof selectedSectors[0]) => s.sector.competitionIntensity, isScore: true, inverse: true },
-                  { label: "Saudi Relevance", getVal: (s: typeof selectedSectors[0]) => s.sector.saudiRelevance, isScore: true },
-                  { label: "Total Funding", getVal: (s: typeof selectedSectors[0]) => formatCurrency(s.sector.totalFunding), isText: true },
-                  { label: "Avg Deal Size", getVal: (s: typeof selectedSectors[0]) => formatCurrency(s.sector.avgDealSize), isText: true },
-                  { label: "YoY Growth", getVal: (s: typeof selectedSectors[0]) => s.sector.yoyGrowth, isScore: true, suffix: "%" },
-                  { label: "Company Count", getVal: (s: typeof selectedSectors[0]) => String(s.sector.companyCount), isText: true },
-                  { label: "Tracked Companies", getVal: (s: typeof selectedSectors[0]) => String(s.companyCount), isText: true },
+                  { label: "الجاذبية", getVal: (s: typeof selectedSectors[0]) => s.sector.attractiveness, isScore: true },
+                  { label: "مؤشر المخاطر", getVal: (s: typeof selectedSectors[0]) => s.sector.riskScore, isScore: true, inverse: true },
+                  { label: "الفجوة السوقية", getVal: (s: typeof selectedSectors[0]) => s.sector.marketGap, isScore: true },
+                  { label: "زخم التمويل", getVal: (s: typeof selectedSectors[0]) => s.sector.fundingMomentum, isScore: true },
+                  { label: "المنافسة", getVal: (s: typeof selectedSectors[0]) => s.sector.competitionIntensity, isScore: true, inverse: true },
+                  { label: "الملاءمة السعودية", getVal: (s: typeof selectedSectors[0]) => s.sector.saudiRelevance, isScore: true },
+                  { label: "إجمالي التمويل", getVal: (s: typeof selectedSectors[0]) => formatCurrency(s.sector.totalFunding), isText: true },
+                  { label: "متوسط حجم الصفقة", getVal: (s: typeof selectedSectors[0]) => formatCurrency(s.sector.avgDealSize), isText: true },
+                  { label: "النمو السنوي", getVal: (s: typeof selectedSectors[0]) => s.sector.yoyGrowth, isScore: true, suffix: "%" },
+                  { label: "عدد الشركات", getVal: (s: typeof selectedSectors[0]) => String(s.sector.companyCount), isText: true },
+                  { label: "الشركات المتابعة", getVal: (s: typeof selectedSectors[0]) => String(s.companyCount), isText: true },
                 ].map(({ label, getVal, isText, isScore, inverse, suffix }) => (
                   <tr key={label} className="border-b border-[#1e1e2e]/50">
                     <td className="px-6 py-3 text-sm text-[#a1a1aa]">{label}</td>
@@ -470,13 +470,13 @@ export default function CompareView({ companies, sectors }: { companies: Company
               <p className="text-xs text-[#a1a1aa] leading-relaxed mb-3">{analysis.overallVerdict}</p>
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <p className="text-[10px] text-emerald-400 uppercase tracking-widest mb-1">Strengths</p>
+                  <p className="text-[10px] text-emerald-400 uppercase tracking-widest mb-1">نقاط القوة</p>
                   {analysis.strengths.slice(0, 2).map((s, idx) => (
                     <p key={idx} className="text-[11px] text-[#a1a1aa] mb-0.5">+ {s}</p>
                   ))}
                 </div>
                 <div>
-                  <p className="text-[10px] text-rose-400 uppercase tracking-widest mb-1">Risks</p>
+                  <p className="text-[10px] text-rose-400 uppercase tracking-widest mb-1">المخاطر</p>
                   {analysis.risks.slice(0, 2).map((r, idx) => (
                     <p key={idx} className="text-[11px] text-[#a1a1aa] mb-0.5">- {r}</p>
                   ))}
@@ -501,13 +501,13 @@ export default function CompareView({ companies, sectors }: { companies: Company
               <p className="text-xs text-[#a1a1aa] leading-relaxed mb-3">{analysis.overallVerdict}</p>
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <p className="text-[10px] text-emerald-400 uppercase tracking-widest mb-1">Opportunities</p>
+                  <p className="text-[10px] text-emerald-400 uppercase tracking-widest mb-1">الفرص</p>
                   {analysis.keyOpportunities.slice(0, 2).map((o, idx) => (
                     <p key={idx} className="text-[11px] text-[#a1a1aa] mb-0.5">+ {o}</p>
                   ))}
                 </div>
                 <div>
-                  <p className="text-[10px] text-rose-400 uppercase tracking-widest mb-1">Risks</p>
+                  <p className="text-[10px] text-rose-400 uppercase tracking-widest mb-1">المخاطر</p>
                   {analysis.keyRisks.slice(0, 2).map((r, idx) => (
                     <p key={idx} className="text-[11px] text-[#a1a1aa] mb-0.5">- {r}</p>
                   ))}
@@ -524,7 +524,7 @@ export default function CompareView({ companies, sectors }: { companies: Company
         <div className="glass rounded-xl p-12 text-center">
           <ArrowLeftRight className="w-10 h-10 text-[#71717a] mx-auto mb-3" />
           <p className="text-sm text-[#71717a]">
-            Select at least 2 {mode} to compare side-by-side
+            اختر ٢ على الأقل من {mode === 'companies' ? 'الشركات' : 'القطاعات'} للمقارنة جنبًا إلى جنب
           </p>
         </div>
       )}

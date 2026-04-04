@@ -1,13 +1,13 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Sectors — Saudi VC Market Analysis",
+  title: "القطاعات — تحليل سوق رأس المال الجريء السعودي",
   description:
-    "Explore 10 key investment sectors in Saudi Arabia: FinTech, E-Commerce, HealthTech, EdTech, and more. Attractiveness scores, funding data, and Vision 2030 alignment.",
+    "استكشف 10 قطاعات استثمارية رئيسية في المملكة العربية السعودية: التقنية المالية، التجارة الإلكترونية، التقنية الصحية، تقنية التعليم، والمزيد. مؤشرات الجاذبية وبيانات التمويل وتوافق رؤية 2030.",
   openGraph: {
-    title: "Sectors — Saudi VC Market Analysis",
+    title: "القطاعات — تحليل سوق رأس المال الجريء السعودي",
     description:
-      "Explore 10 key investment sectors in Saudi Arabia: FinTech, E-Commerce, HealthTech, EdTech, and more. Attractiveness scores, funding data, and Vision 2030 alignment.",
+      "استكشف 10 قطاعات استثمارية رئيسية في المملكة العربية السعودية.",
   },
 };
 

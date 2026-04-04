@@ -102,7 +102,7 @@ export function KpiCard({ title, value, subtitle, change, icon: Icon, color, del
           >
             {change >= 0 ? "+" : ""}{change}%
           </span>
-          <span className="text-[10px] text-[#71717a]">vs last quarter</span>
+          <span className="text-[10px] text-[#71717a]">مقارنة بالربع السابق</span>
         </div>
       )}
 

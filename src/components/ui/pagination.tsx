@@ -36,7 +36,7 @@ export function Pagination({ page, totalPages, total, baseUrl, searchParams = {}
 
   return (
     <div className="flex items-center justify-between gap-4">
-      <p className="text-xs text-[#71717a]">{total} results</p>
+      <p className="text-xs text-[#71717a]">{total} نتيجة</p>
       <div className="flex items-center gap-1">
         {page > 1 ? (
           <Link

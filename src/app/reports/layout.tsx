@@ -1,13 +1,13 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Reports — Saudi VC Investment Reports",
+  title: "التقارير — تقارير استثمار رأس المال الجريء السعودي",
   description:
-    "Generate and view detailed investment reports for Saudi Arabian companies and sectors. AI-powered analysis covering financials, risk, and market positioning.",
+    "إعداد وعرض تقارير استثمارية تفصيلية للشركات والقطاعات في المملكة العربية السعودية. تحليل مدعوم بالذكاء الاصطناعي يشمل البيانات المالية والمخاطر والموقع السوقي.",
   openGraph: {
-    title: "Reports — Saudi VC Investment Reports",
+    title: "التقارير — تقارير استثمار رأس المال الجريء السعودي",
     description:
-      "Generate and view detailed investment reports for Saudi Arabian companies and sectors. AI-powered analysis covering financials, risk, and market positioning.",
+      "إعداد وعرض تقارير استثمارية تفصيلية للشركات والقطاعات في المملكة العربية السعودية.",
   },
 };
 

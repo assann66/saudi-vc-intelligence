@@ -10,6 +10,13 @@ import Link from "next/link";
 
 type SortKey = "investability" | "totalFunding" | "growthRate" | "riskScore";
 
+const sortKeyLabels: Record<SortKey, string> = {
+  investability: "قابلية الاستثمار",
+  totalFunding: "التمويل",
+  growthRate: "معدل النمو",
+  riskScore: "المخاطر",
+};
+
 export function CompanyTable({ companies, sectors }: { companies: Company[]; sectors: Sector[] }) {
   const [sortKey, setSortKey] = useState<SortKey>("investability");
   const [sortAsc, setSortAsc] = useState(false);
@@ -31,7 +38,8 @@ export function CompanyTable({ companies, sectors }: { companies: Company[]; sec
   };
 
   const getSectorName = (sectorId: string) => {
-    return sectors.find((s) => s.id === sectorId)?.name ?? sectorId;
+    const sector = sectors.find((s) => s.id === sectorId);
+    return sector?.arabicName ?? sector?.name ?? sectorId;
   };
 
   const getScoreColor = (score: number, inverse = false) => {
@@ -54,16 +62,16 @@ export function CompanyTable({ companies, sectors }: { companies: Company[]; sec
     <div className="glass rounded-xl p-6 animate-fade-in" style={{ animationDelay: "500ms" }}>
       <div className="flex items-center justify-between mb-6">
         <div>
-          <h3 className="text-sm font-semibold text-white">Top Companies</h3>
+          <h3 className="text-sm font-semibold text-white font-heading">أبرز الشركات</h3>
           <p className="text-xs text-[#71717a] mt-1">
-            Ranked by {sortKey.replace(/([A-Z])/g, " $1").toLowerCase()}
+            مرتبة حسب {sortKeyLabels[sortKey]}
           </p>
         </div>
         <Link
           href="/companies"
           className="text-xs text-emerald-400 hover:text-emerald-300 flex items-center gap-1 transition-colors"
         >
-          View all <ExternalLink className="w-3 h-3" />
+          عرض الكل <ExternalLink className="w-3 h-3" />
         </Link>
       </div>
 
@@ -71,45 +79,45 @@ export function CompanyTable({ companies, sectors }: { companies: Company[]; sec
         <table className="w-full">
           <thead>
             <tr className="border-b border-[#1e1e2e]">
-              <th className="text-left text-[10px] font-semibold uppercase tracking-widest text-[#71717a] pb-3 pr-4">
-                Company
+              <th className="text-right text-[10px] font-semibold tracking-widest text-[#71717a] pb-3 pl-4">
+                الشركة
               </th>
-              <th className="text-left text-[10px] font-semibold uppercase tracking-widest text-[#71717a] pb-3 pr-4">
-                Sector
+              <th className="text-right text-[10px] font-semibold tracking-widest text-[#71717a] pb-3 pl-4">
+                القطاع
               </th>
-              <th className="text-left text-[10px] font-semibold uppercase tracking-widest text-[#71717a] pb-3 pr-4">
-                Stage
+              <th className="text-right text-[10px] font-semibold tracking-widest text-[#71717a] pb-3 pl-4">
+                المرحلة
               </th>
               <th
-                className="text-right text-[10px] font-semibold uppercase tracking-widest text-[#71717a] pb-3 pr-4 cursor-pointer hover:text-white transition-colors"
+                className="text-left text-[10px] font-semibold tracking-widest text-[#71717a] pb-3 pl-4 cursor-pointer hover:text-white transition-colors"
                 onClick={() => handleSort("totalFunding")}
               >
-                <span className="flex items-center justify-end gap-1">
-                  Funding <ArrowUpDown className="w-3 h-3" />
+                <span className="flex items-center justify-start gap-1">
+                  التمويل <ArrowUpDown className="w-3 h-3" />
                 </span>
               </th>
               <th
-                className="text-right text-[10px] font-semibold uppercase tracking-widest text-[#71717a] pb-3 pr-4 cursor-pointer hover:text-white transition-colors"
+                className="text-left text-[10px] font-semibold tracking-widest text-[#71717a] pb-3 pl-4 cursor-pointer hover:text-white transition-colors"
                 onClick={() => handleSort("investability")}
               >
-                <span className="flex items-center justify-end gap-1">
-                  Investability <ArrowUpDown className="w-3 h-3" />
+                <span className="flex items-center justify-start gap-1">
+                  الاستثمار <ArrowUpDown className="w-3 h-3" />
                 </span>
               </th>
               <th
-                className="text-right text-[10px] font-semibold uppercase tracking-widest text-[#71717a] pb-3 pr-4 cursor-pointer hover:text-white transition-colors"
+                className="text-left text-[10px] font-semibold tracking-widest text-[#71717a] pb-3 pl-4 cursor-pointer hover:text-white transition-colors"
                 onClick={() => handleSort("riskScore")}
               >
-                <span className="flex items-center justify-end gap-1">
-                  Risk <ArrowUpDown className="w-3 h-3" />
+                <span className="flex items-center justify-start gap-1">
+                  المخاطر <ArrowUpDown className="w-3 h-3" />
                 </span>
               </th>
               <th
-                className="text-right text-[10px] font-semibold uppercase tracking-widest text-[#71717a] pb-3 cursor-pointer hover:text-white transition-colors"
+                className="text-left text-[10px] font-semibold tracking-widest text-[#71717a] pb-3 cursor-pointer hover:text-white transition-colors"
                 onClick={() => handleSort("growthRate")}
               >
-                <span className="flex items-center justify-end gap-1">
-                  Growth <ArrowUpDown className="w-3 h-3" />
+                <span className="flex items-center justify-start gap-1">
+                  النمو <ArrowUpDown className="w-3 h-3" />
                 </span>
               </th>
             </tr>
@@ -120,26 +128,26 @@ export function CompanyTable({ companies, sectors }: { companies: Company[]; sec
                 key={company.id}
                 className="border-b border-[#1e1e2e]/50 hover:bg-white/[0.02] transition-colors"
               >
-                <td className="py-3 pr-4">
+                <td className="py-3 pl-4">
                   <div>
                     <p className="text-sm font-medium text-white">{company.name}</p>
                     <p className="text-[10px] text-[#71717a]">{company.hqCity}</p>
                   </div>
                 </td>
-                <td className="py-3 pr-4">
+                <td className="py-3 pl-4">
                   <span className="text-xs text-[#a1a1aa] bg-white/5 px-2 py-1 rounded-md">
                     {getSectorName(company.sectorId)}
                   </span>
                 </td>
-                <td className="py-3 pr-4">
+                <td className="py-3 pl-4">
                   <span className="text-xs text-[#a1a1aa]">{company.stage}</span>
                 </td>
-                <td className="py-3 pr-4 text-right">
+                <td className="py-3 pl-4 text-left">
                   <span className="text-sm font-medium text-white">
                     {formatCurrency(company.totalFunding)}
                   </span>
                 </td>
-                <td className="py-3 pr-4 text-right">
+                <td className="py-3 pl-4 text-left">
                   <span
                     className={cn(
                       "text-sm font-semibold px-2 py-0.5 rounded",
@@ -150,7 +158,7 @@ export function CompanyTable({ companies, sectors }: { companies: Company[]; sec
                     {company.investability}
                   </span>
                 </td>
-                <td className="py-3 pr-4 text-right">
+                <td className="py-3 pl-4 text-left">
                   <span
                     className={cn(
                       "text-sm font-semibold px-2 py-0.5 rounded",
@@ -161,7 +169,7 @@ export function CompanyTable({ companies, sectors }: { companies: Company[]; sec
                     {company.riskScore}
                   </span>
                 </td>
-                <td className="py-3 text-right">
+                <td className="py-3 text-left">
                   <span className={cn("text-sm font-medium", getScoreColor(company.growthRate))}>
                     +{company.growthRate}%
                   </span>

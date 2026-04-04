@@ -68,10 +68,10 @@ export default function RiskInsightsView({ companies, sectors }: { companies: Co
       <div className="space-y-1">
         <div className="flex items-center gap-3">
           <Shield className="w-6 h-6 text-rose-400" />
-          <h1 className="text-2xl font-bold text-white tracking-tight">Risk Insights</h1>
+          <h1 className="text-2xl font-bold font-heading text-white tracking-tight">رؤى المخاطر</h1>
         </div>
         <p className="text-sm text-[#71717a]">
-          AI-highlighted risks, market gaps, and underfunded areas across the Saudi VC ecosystem
+          مخاطر محددة بالذكاء الاصطناعي وفجوات سوقية ومناطق ناقصة التمويل عبر منظومة رأس المال الجريء السعودي
         </p>
       </div>
 
@@ -80,34 +80,34 @@ export default function RiskInsightsView({ companies, sectors }: { companies: Co
         <div className="glass rounded-xl p-5 border-l-2 border-rose-500/50">
           <div className="flex items-center gap-2 mb-2">
             <AlertTriangle className="w-4 h-4 text-rose-400" />
-            <p className="text-[10px] text-[#71717a] uppercase tracking-widest">High Risk Companies</p>
+            <p className="text-[10px] text-[#71717a] uppercase tracking-widest">شركات مرتفعة المخاطر</p>
           </div>
           <p className="text-2xl font-bold text-rose-400">{highRiskCompanies.length}</p>
-          <p className="text-xs text-[#71717a] mt-1">Risk score {"\u2265"} 40</p>
+          <p className="text-xs text-[#71717a] mt-1">مؤشر المخاطر {"\u2265"} ٤٠</p>
         </div>
         <div className="glass rounded-xl p-5 border-l-2 border-amber-500/50">
           <div className="flex items-center gap-2 mb-2">
             <TrendingDown className="w-4 h-4 text-amber-400" />
-            <p className="text-[10px] text-[#71717a] uppercase tracking-widest">Low Growth</p>
+            <p className="text-[10px] text-[#71717a] uppercase tracking-widest">نمو منخفض</p>
           </div>
           <p className="text-2xl font-bold text-amber-400">{lowGrowthCompanies.length}</p>
-          <p className="text-xs text-[#71717a] mt-1">Growth &lt; 35%</p>
+          <p className="text-xs text-[#71717a] mt-1">النمو أقل من ٣٥٪</p>
         </div>
         <div className="glass rounded-xl p-5 border-l-2 border-orange-500/50">
           <div className="flex items-center gap-2 mb-2">
             <Zap className="w-4 h-4 text-orange-400" />
-            <p className="text-[10px] text-[#71717a] uppercase tracking-widest">Overheated Sectors</p>
+            <p className="text-[10px] text-[#71717a] uppercase tracking-widest">قطاعات محتدة</p>
           </div>
           <p className="text-2xl font-bold text-orange-400">{overheatedSectors.length}</p>
-          <p className="text-xs text-[#71717a] mt-1">High momentum + high risk</p>
+          <p className="text-xs text-[#71717a] mt-1">زخم مرتفع + مخاطر عالية</p>
         </div>
         <div className="glass rounded-xl p-5 border-l-2 border-cyan-500/50">
           <div className="flex items-center gap-2 mb-2">
             <Target className="w-4 h-4 text-cyan-400" />
-            <p className="text-[10px] text-[#71717a] uppercase tracking-widest">Market Gaps</p>
+            <p className="text-[10px] text-[#71717a] uppercase tracking-widest">الفجوات السوقية</p>
           </div>
           <p className="text-2xl font-bold text-cyan-400">{underfundedSectors.length}</p>
-          <p className="text-xs text-[#71717a] mt-1">Gap score {"\u2265"} 70</p>
+          <p className="text-xs text-[#71717a] mt-1">مؤشر الفجوة {"\u2265"} ٧٠</p>
         </div>
       </div>
 
@@ -115,7 +115,7 @@ export default function RiskInsightsView({ companies, sectors }: { companies: Co
       <div className="glass rounded-xl overflow-hidden">
         <div className="px-6 py-4 border-b border-[#1e1e2e] flex items-center gap-2">
           <AlertTriangle className="w-4 h-4 text-rose-400" />
-          <h3 className="text-sm font-semibold text-white">Elevated Risk Companies</h3>
+          <h3 className="text-sm font-semibold font-heading text-white">شركات مرتفعة المخاطر</h3>
         </div>
         <div className="divide-y divide-[#1e1e2e]/50">
           {highRiskCompanies.map(({ company, sector, analysis }) => (
@@ -139,11 +139,11 @@ export default function RiskInsightsView({ companies, sectors }: { companies: Co
               </div>
               <div className="flex gap-6 text-center shrink-0">
                 <div>
-                  <p className="text-[10px] text-[#71717a] uppercase tracking-widest">Investability</p>
+                  <p className="text-[10px] text-[#71717a] uppercase tracking-widest">قابلية الاستثمار</p>
                   <p className={cn("text-sm font-bold mt-1", getScoreColor(company.investability))}>{company.investability}</p>
                 </div>
                 <div>
-                  <p className="text-[10px] text-[#71717a] uppercase tracking-widest">Growth</p>
+                  <p className="text-[10px] text-[#71717a] uppercase tracking-widest">النمو</p>
                   <p className={cn("text-sm font-bold mt-1", getScoreColor(company.growthRate))}>+{company.growthRate}%</p>
                 </div>
               </div>
@@ -161,11 +161,10 @@ export default function RiskInsightsView({ companies, sectors }: { companies: Co
         <div className="glass rounded-xl p-6">
           <div className="flex items-center gap-2 mb-4">
             <Target className="w-4 h-4 text-cyan-400" />
-            <h3 className="text-sm font-semibold text-white">Biggest Market Gaps</h3>
+            <h3 className="text-sm font-semibold font-heading text-white">أكبر الفجوات السوقية</h3>
           </div>
           <p className="text-xs text-[#a1a1aa] mb-4 leading-relaxed">
-            Sectors with highest unmet market opportunity. High gap scores indicate underpenetrated
-            markets where new entrants can capture significant value.
+            القطاعات ذات الفرص السوقية غير المستغلة. المؤشرات المرتفعة تشير إلى أسواق غير مخترقة حيث يمكن للوافدين الجدد تحقيق قيمة كبيرة.
           </p>
           <div className="space-y-3">
             {underfundedSectors.map(({ sector }) => (
@@ -183,9 +182,9 @@ export default function RiskInsightsView({ companies, sectors }: { companies: Co
                   />
                 </div>
                 <div className="flex justify-between text-[10px] text-[#71717a]">
-                  <span>Competition: {sector.competitionIntensity}/100</span>
-                  <span>Funding: {formatCurrency(sector.totalFunding)}</span>
-                  <span>{sector.companyCount} companies</span>
+                  <span>المنافسة: {sector.competitionIntensity}/100</span>
+                  <span>التمويل: {formatCurrency(sector.totalFunding)}</span>
+                  <span>{sector.companyCount} شركات</span>
                 </div>
               </div>
             ))}
@@ -196,11 +195,10 @@ export default function RiskInsightsView({ companies, sectors }: { companies: Co
         <div className="glass rounded-xl p-6">
           <div className="flex items-center gap-2 mb-4">
             <Eye className="w-4 h-4 text-amber-400" />
-            <h3 className="text-sm font-semibold text-white">Competition Hotspots</h3>
+            <h3 className="text-sm font-semibold font-heading text-white">بؤر المنافسة</h3>
           </div>
           <p className="text-xs text-[#a1a1aa] mb-4 leading-relaxed">
-            Sectors with highest competition intensity. High competition may lead to margin
-            compression, elevated CAC, and market consolidation.
+            القطاعات ذات أعلى شدة منافسة. المنافسة العالية قد تؤدي إلى ضغط الهوامش وارتفاع تكلفة الاستحواذ وتوحيد السوق.
           </p>
           <div className="space-y-3">
             {highCompetitionSectors.map(({ sector }) => (
@@ -218,9 +216,9 @@ export default function RiskInsightsView({ companies, sectors }: { companies: Co
                   />
                 </div>
                 <div className="flex justify-between text-[10px] text-[#71717a]">
-                  <span>Avg Deal: {formatCurrency(sector.avgDealSize)}</span>
-                  <span>Risk: {sector.riskScore}/100</span>
-                  <span>Growth: +{sector.yoyGrowth}%</span>
+                  <span>متوسط الصفقة: {formatCurrency(sector.avgDealSize)}</span>
+                  <span>المخاطر: {sector.riskScore}/100</span>
+                  <span>النمو: +{sector.yoyGrowth}%</span>
                 </div>
               </div>
             ))}
@@ -233,11 +231,10 @@ export default function RiskInsightsView({ companies, sectors }: { companies: Co
         <div className="glass rounded-xl p-6 border border-orange-500/20 bg-orange-500/[0.03]">
           <div className="flex items-center gap-2 mb-4">
             <Zap className="w-4 h-4 text-orange-400" />
-            <h3 className="text-sm font-semibold text-orange-400">Overheating Warning</h3>
+            <h3 className="text-sm font-semibold font-heading text-orange-400">تحذير من الاحتدام</h3>
           </div>
           <p className="text-xs text-[#a1a1aa] mb-4 leading-relaxed">
-            These sectors show high funding momentum combined with elevated risk profiles. This
-            pattern may indicate excessive capital deployment ahead of market fundamentals.
+            تظهر هذه القطاعات زخم تمويل مرتفع مع مؤشرات مخاطر مرتفعة. هذا النمط قد يشير إلى ضخ رأس مال مفرط يسبق أساسيات السوق.
           </p>
           <div className="grid grid-cols-2 gap-4">
             {overheatedSectors.map(({ sector, analysis }) => (
@@ -245,15 +242,15 @@ export default function RiskInsightsView({ companies, sectors }: { companies: Co
                 <p className="text-sm font-medium text-white mb-2">{sector.name}</p>
                 <div className="grid grid-cols-3 gap-3 text-center mb-3">
                   <div>
-                    <p className="text-[10px] text-[#71717a]">Momentum</p>
+                    <p className="text-[10px] text-[#71717a]">الزخم</p>
                     <p className="text-sm font-bold text-emerald-400">{sector.fundingMomentum}</p>
                   </div>
                   <div>
-                    <p className="text-[10px] text-[#71717a]">Risk</p>
+                    <p className="text-[10px] text-[#71717a]">المخاطر</p>
                     <p className="text-sm font-bold text-rose-400">{sector.riskScore}</p>
                   </div>
                   <div>
-                    <p className="text-[10px] text-[#71717a]">Growth</p>
+                    <p className="text-[10px] text-[#71717a]">النمو</p>
                     <p className="text-sm font-bold text-amber-400">+{sector.yoyGrowth}%</p>
                   </div>
                 </div>
@@ -270,7 +267,7 @@ export default function RiskInsightsView({ companies, sectors }: { companies: Co
       <div className="glass rounded-xl p-6">
         <div className="flex items-center gap-2 mb-4">
           <Shield className="w-4 h-4 text-violet-400" />
-          <h3 className="text-sm font-semibold text-white">Risk Digest — All Sectors</h3>
+          <h3 className="text-sm font-semibold font-heading text-white">ملخص المخاطر — جميع القطاعات</h3>
         </div>
         <div className="grid grid-cols-2 gap-3">
           {sectorAnalyses.map(({ sector, analysis }) => (
