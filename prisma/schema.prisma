@@ -94,3 +94,21 @@ model Company {
   @@index([investability])
   @@index([stage])
 }
+
+model Template {
+  id          String   @id @default(cuid())
+  name        String
+  arabicName  String
+  category    String   // ai-insight, transformation, vision, sector, company, funding, comparison, thesis, risk, v2030
+  layout      String   @default("standard") // standard, split, centered, full-bleed
+  content     String   // JSON: { title, subtitle, body, bullets, footer, image }
+  colorScheme String   // JSON: { primary, secondary, accent, background, text }
+  fonts       String   // JSON: { heading, body }
+  dimensions  String   @default("1080x1350") // WxH in px
+  isRTL       Boolean  @default(true)
+  thumbnail   String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([category])
+}

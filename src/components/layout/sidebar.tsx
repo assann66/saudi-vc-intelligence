@@ -17,6 +17,8 @@ import {
   Menu,
   X,
   Settings,
+  Brain,
+  FileImage,
 } from "lucide-react";
 import { GlobalSearch } from "./global-search";
 
@@ -27,10 +29,12 @@ const navigation = [
 ];
 
 const analyticsNav = [
+  { name: "AI Analytics", href: "/analytics", icon: Brain },
   { name: "Rankings", href: "/rankings", icon: Trophy },
   { name: "Reports", href: "/reports", icon: FileText },
   { name: "Risk Insights", href: "/risk-insights", icon: Shield },
   { name: "Compare", href: "/compare", icon: ArrowLeftRight },
+  { name: "Templates", href: "/templates", icon: FileImage },
 ];
 
 const adminNav = [
